@@ -21,10 +21,21 @@ function initFirebase() {
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
-        
-        db = firebase.firestore();
-        auth = firebase.auth();
-        
+
+        if (typeof firebase.firestore === 'function') {
+            db = firebase.firestore();
+        } else {
+            db = null;
+            console.warn('⚠️ Firestore não disponível neste contexto');
+        }
+
+        if (typeof firebase.auth === 'function') {
+            auth = firebase.auth();
+        } else {
+            auth = null;
+            console.warn('⚠️ Auth não disponível neste contexto');
+        }
+
         console.log('✅ Firebase inicializado com sucesso!');
         return true;
     } catch (error) {
