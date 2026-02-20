@@ -1,0 +1,101 @@
+═══════════════════════════════════════════════════════════════════════════════
+    OPEDROQUETATUA - SISTEMA DE FORMULÁRIOS PARA ESTÚDIO DE TATUAGEM
+    AVISO DE DIREITOS AUTORAIS E PROPRIEDADE INTELECTUAL
+═══════════════════════════════════════════════════════════════════════════════
+
+Copyright (c) 2026 Opedroquetatua
+Todos os direitos reservados.
+
+═══════════════════════════════════════════════════════════════════════════════
+PROTEÇÃO DE PROPRIEDADE INTELECTUAL
+═══════════════════════════════════════════════════════════════════════════════
+
+Este software, incluindo mas não limitado ao código-fonte, documentação,
+interface visual, design, arquitetura, algoritmos e conceitos nele contidos,
+é propriedade exclusiva e protegida de Opedroquetatua.
+
+═══════════════════════════════════════════════════════════════════════════════
+RESTRIÇÕES DE USO
+═══════════════════════════════════════════════════════════════════════════════
+
+PROIBIÇÕES:
+✘ Uso não autorizado
+✘ Cópia ou reprodução total ou parcial
+✘ Modificação ou criação de obras derivadas
+✘ Distribuição, publicação ou divulgação
+✘ Engenharia reversa
+✘ Remoção de avisos de copyright
+✘ Uso comercial sem licença
+
+═══════════════════════════════════════════════════════════════════════════════
+USO AUTORIZADO
+═══════════════════════════════════════════════════════════════════════════════
+
+O uso deste software requer licenciamento formal e autorização expressa
+e por escrito do detentor dos direitos autorais.
+
+Para informações sobre licenciamento comercial, entre em contato através dos
+canais oficiais de Opedroquetatua.
+
+═══════════════════════════════════════════════════════════════════════════════
+REGISTRO E PROTEÇÃO LEGAL
+═══════════════════════════════════════════════════════════════════════════════
+
+Este software está em processo de registro no INPI (Instituto Nacional da
+Propriedade Industrial) sob o regime de Registro de Programa de Computador (RPC),
+conforme Lei nº 9.609/98 (Lei do Software).
+
+═══════════════════════════════════════════════════════════════════════════════
+PENALIDADES
+═══════════════════════════════════════════════════════════════════════════════
+
+A violação dos direitos autorais aqui estabelecidos sujeita o infrator às
+sanções civis e penais previstas na legislação brasileira, incluindo:
+
+• Lei de Software (Lei nº 9.609/98)
+• Lei de Direitos Autorais (Lei nº 9.610/98)
+• Código Penal Brasileiro (Artigos 184 e seguintes)
+
+Penalidades incluem:
+- Indenização por danos materiais e morais
+- Apreensão de cópias não autorizadas
+- Processo criminal por violação de direitos autorais
+
+═══════════════════════════════════════════════════════════════════════════════
+COMPONENTES PROTEGIDOS
+═══════════════════════════════════════════════════════════════════════════════
+
+✓ Código-fonte completo (HTML, CSS, JavaScript)
+✓ Arquitetura e estrutura do sistema
+✓ Interface visual e design
+✓ Fluxos de trabalho e processos
+✓ Integração com Firebase
+✓ Sistema de autenticação
+✓ Lógica de negócio
+✓ Documentação técnica
+✓ Manuais de usuário
+✓ Base de dados e esquemas
+✓ APIs e integrações
+
+═══════════════════════════════════════════════════════════════════════════════
+AVISO LEGAL
+═══════════════════════════════════════════════════════════════════════════════
+
+O software é fornecido "COMO ESTÁ", sem garantias de qualquer tipo, expressas
+ou implícitas, incluindo mas não se limitando a garantias de comercialização,
+adequação a um propósito específico e não violação.
+
+═══════════════════════════════════════════════════════════════════════════════
+DATA DE CRIAÇÃO E VERSÃO
+═══════════════════════════════════════════════════════════════════════════════
+
+Data de Criação: 2026
+Versão: 1.0
+Última Atualização: 20 de fevereiro de 2026
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Para consultas sobre licenciamento, parcerias ou uso comercial,
+entre em contato através dos canais oficiais de Opedroquetatua.
+
+═══════════════════════════════════════════════════════════════════════════════
