@@ -298,40 +298,59 @@
         onAuthStateChanged(user => {
             if (!user) {
                 // Não está logado, redirecionar para login
+                console.log('❌ Usuário não autenticado, redirecionando para login');
                 window.location.href = 'admin-login.html';
             } else {
                 usuarioLogado = user;
-                console.log('Usuário logado:', user.email);
+                console.log('✅ Usuário logado:', user.email);
                 // Carregar formulários
-                carregarFormularios();
+                setTimeout(() => carregarFormularios(), 500);
             }
         });
 
         // Carregar e exibir formulários
         async function carregarFormularios() {
             console.log('🔄 Iniciando carregamento de formulários...');
-            console.log('Firebase inicializado:', firebaseInitialized);
-            console.log('localStorage conteúdo:', localStorage.getItem('studioForms'));
+            console.log('📋 firebaseInitialized:', firebaseInitialized);
+            console.log('📋 typeof loadFromFirestore:', typeof loadFromFirestore);
+            console.log('📋 db disponível:', typeof db !== 'undefined' ? 'sim' : 'não');
+            
+            const storageForms = localStorage.getItem('studioForms');
+            console.log('📦 localStorage studioForms existe:', storageForms ? 'sim' : 'não');
+            if (storageForms) {
+                console.log('📦 localStorage conteúdo:', storageForms.substring(0, 200) + '...');
+            }
             
             // Tentar carregar do Firebase primeiro
             if (firebaseInitialized && typeof loadFromFirestore === 'function') {
                 try {
-                    todosFormularios = await loadFromFirestore();
-                    console.log(`✅ ${todosFormularios.length} formulários carregados do Firebase`);
+                    console.log('🔂 Tentando carregar do Firestore...');
+                    const firebaseData = await loadFromFirestore();
+                    console.log(`✅ Firestore: ${firebaseData.length} formulários carregados`);
+                    if (firebaseData.length > 0) {
+                        todosFormularios = firebaseData;
+                    } else {
+                        // Se Firestore vazio, tenta localStorage
+                        console.log('⚠️ Firestore vazio, tentando localStorage...');
+                        const savedForms = localStorage.getItem('studioForms');
+                        todosFormularios = savedForms ? JSON.parse(savedForms) : [];
+                        console.log('📦 localStorage:', todosFormularios.length, 'formulários');
+                    }
                 } catch (error) {
-                    console.warn('⚠️ Erro ao carregar do Firebase, usando localStorage:', error);
+                    console.error('❌ Erro ao carregar do Firebase:', error);
                     const savedForms = localStorage.getItem('studioForms');
                     todosFormularios = savedForms ? JSON.parse(savedForms) : [];
-                    console.log('📦 Formulários do localStorage:', todosFormularios.length);
+                    console.log('📦 localStorage (fallback):', todosFormularios.length, 'formulários');
                 }
             } else {
                 // Fallback para localStorage
+                console.log('⚠️ Firebase não disponível, usando localStorage...');
                 const savedForms = localStorage.getItem('studioForms');
                 todosFormularios = savedForms ? JSON.parse(savedForms) : [];
-                console.log('📦 Formulários do localStorage (fallback):', todosFormularios.length);
+                console.log('📦 localStorage (fallback):', todosFormularios.length, 'formulários');
             }
             
-            console.log('Total de formulários carregados:', todosFormularios.length);
+            console.log('📊 Total de formulários a exibir:', todosFormularios.length);
             atualizarEstatisticas();
             exibirFormularios(todosFormularios);
         }
