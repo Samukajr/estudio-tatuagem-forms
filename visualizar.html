@@ -499,193 +499,176 @@
             exibirFormularios(filtered);
         }
 
-        // Ver detalhes - Mostra TODOS os dados preenchidos
+        // Ver detalhes - Mostra apenas os dados específicos do tipo de formulário
         function verDetalhes(index) {
             const form = todosFormularios[index];
-            const modal = window.open('', 'Detalhes', 'width=1200,height=900,scrollbars=yes');
+            const modal = window.open('', 'Detalhes', 'width=1000,height=900,scrollbars=yes');
             
             if (!form) {
                 alert('Erro: Formulário não encontrado');
                 return;
             }
 
-            // Compilar HTML com TODOS os dados
-            let html = '<html><head><meta charset="UTF-8"><title>Ficha Completa - ' + (form.nome || 'Formulário') + '</title>';
+            // Estilo CSS comum
+            let html = '<html><head><meta charset="UTF-8"><title>Ficha - ' + (form.nome || 'Cliente') + '</title>';
             html += '<style>';
             html += '* { margin: 0; padding: 0; box-sizing: border-box; }';
             html += 'body { font-family: "Segoe UI", Arial, sans-serif; background: #f5f5f5; padding: 20px; color: #333; }';
-            html += '.container { max-width: 1100px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); overflow: hidden; }';
+            html += '.container { max-width: 900px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); overflow: hidden; }';
             html += '.header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 30px; text-align: center; border-bottom: 3px solid #e94560; }';
             html += '.header h1 { font-size: 2rem; margin-bottom: 10px; }';
-            html += '.header p { font-size: 0.9rem; opacity: 0.9; }';
+            html += '.header .subtitle { font-size: 0.9rem; opacity: 0.9; margin-top: 5px; }';
             html += '.content { padding: 30px; }';
-            html += '.section { margin-bottom: 30px; padding: 20px; background: #f9f9f9; border-left: 4px solid #e94560; border-radius: 8px; }';
-            html += '.section-title { color: #1e3c72; font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }';
-            html += '.field { margin-bottom: 15px; padding: 10px; background: white; border-radius: 6px; }';
-            html += '.field-label { font-weight: 600; color: #1e3c72; font-size: 0.85rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }';
-            html += '.field-value { color: #555; font-size: 1rem; padding: 10px; background: #f5f5f5; border-left: 3px solid #e94560; border-radius: 4px; word-break: break-word; }';
-            html += '.field-value.empty { color: #999; font-style: italic; }';
-            html += '.array-item { background: #e94560; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin: 3px; }';
-            html += '.object-value { background: #f0f0f0; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 0.9rem; }';
-            html += '.data-info { text-align: center; font-size: 0.85rem; color: #999; margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee; }';
-            html += '.print-btn { display: block; margin: 20px auto; padding: 12px 30px; background: #e94560; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; }';
+            html += '.section { margin-bottom: 25px; padding: 20px; background: #f9f9f9; border-left: 4px solid #e94560; border-radius: 8px; }';
+            html += '.section-title { color: #1e3c72; font-size: 1.15rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #e94560; padding-bottom: 10px; }';
+            html += '.field { margin-bottom: 15px; }';
+            html += '.field-label { font-weight: 600; color: #1e3c72; font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; display: block; }';
+            html += '.field-value { color: #555; font-size: 1rem; padding: 12px; background: white; border-left: 3px solid #e94560; border-radius: 4px; word-break: break-word; }';
+            html += '.field-value.empty { color: #999; font-style: italic; background: #fafafa; }';
+            html += '.array-items { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }';
+            html += '.array-item { background: #e94560; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.9rem; display: inline-block; }';
+            html += '.warning-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; border-radius: 4px; margin: 10px 0; }';
+            html += '.warning-box strong { color: #856404; }';
+            html += '.info-box { background: #d1ecf1; border-left: 4px solid #17a2b8; padding: 15px; border-radius: 4px; margin: 10px 0; }';
+            html += '.success-box { background: #d4edda; border-left: 4px solid #28a745; padding: 15px; border-radius: 4px; margin: 10px 0; }';
+            html += '.footer-info { text-align: center; font-size: 0.85rem; color: #999; margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee; }';
+            html += '.print-btn { display: block; margin: 20px auto; padding: 12px 30px; background: #e94560; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; transition: background 0.3s; }';
             html += '.print-btn:hover { background: #c73550; }';
-            html += '.raw-data { background: #f5f5f5; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; overflow-x: auto; border-left: 4px solid #666; margin-top: 20px; }';
             html += '@media print { body { background: white; padding: 0; } .container { box-shadow: none; } .print-btn { display: none; } }';
             html += '</style></head><body>';
             html += '<div class="container">';
-            html += '<div class="header"><h1>Ficha Completa do Cliente</h1>';
-            html += '<p>Tipo: ' + (form.formType ? form.formType.replace('-', ' ').toUpperCase() : 'DESCONHECIDO') + '</p></div>';
+
+            // Header baseado no tipo
+            const tipoNome = form.formType === 'agendamento' ? 'AGENDAMENTO' : 
+                           form.formType === 'anamnese' ? 'ANAMNESE' : 
+                           form.formType === 'consentimento' ? 'CONSENTIMENTO' : 
+                           form.formType === 'uso-imagem' ? 'AUTORIZAÇÃO DE USO DE IMAGEM' : 'FORMULÁRIO';
+            
+            html += '<div class="header">';
+            html += '<h1>' + (form.nome || 'Cliente') + '</h1>';
+            html += '<div class="subtitle">Formulário de ' + tipoNome + '</div>';
+            html += '<div class="subtitle" style="margin-top: 10px; font-size: 0.8rem;">ID: ' + (form.formId || form.id || 'N/A') + '</div>';
+            html += '</div>';
             html += '<div class="content">';
 
-            // Seção 1: Informações Básicas
+            // Dados Pessoais (comum a todos)
             html += '<div class="section">';
-            html += '<div class="section-title">📋 Informações Básicas do Formulário</div>';
-            html += '<div class="field"><div class="field-label">ID do Formulário</div><div class="field-value">' + (form.formId || form.id || 'N/A') + '</div></div>';
-            html += '<div class="field"><div class="field-label">Tipo</div><div class="field-value">' + (form.formType || 'N/A') + '</div></div>';
-            html += '<div class="field"><div class="field-label">Data de Preenchimento</div><div class="field-value">' + (form.timestamp ? new Date(form.timestamp).toLocaleString('pt-BR') : (form.createdAt ? new Date(form.createdAt).toLocaleString('pt-BR') : 'N/A')) + '</div></div>';
-            html += '<div class="field"><div class="field-label">Status</div><div class="field-value">' + (form.status || 'novo') + '</div></div>';
+            html += '<div class="section-title">👤 Dados Pessoais</div>';
+            if (form.nome) html += '<div class="field"><div class="field-label">Nome Completo</div><div class="field-value">' + form.nome + '</div></div>';
+            if (form.cpf) html += '<div class="field"><div class="field-label">CPF</div><div class="field-value">' + form.cpf + '</div></div>';
+            if (form.email) html += '<div class="field"><div class="field-label">E-mail</div><div class="field-value">' + form.email + '</div></div>';
+            if (form.telefone) html += '<div class="field"><div class="field-label">Telefone/WhatsApp</div><div class="field-value">' + form.telefone + '</div></div>';
+            if (form.dataNascimento) html += '<div class="field"><div class="field-label">Data de Nascimento</div><div class="field-value">' + new Date(form.dataNascimento).toLocaleDateString('pt-BR') + (form.idade ? ' (' + form.idade + ' anos)' : '') + '</div></div>';
             html += '</div>';
 
-            // Seção 2: Dados Pessoais
-            html += '<div class="section">';
-            html += '<div class="section-title">👤 Dados Pessoais do Cliente</div>';
-            html += '<div class="field"><div class="field-label">Nome Completo</div><div class="field-value ' + (form.nome ? '' : 'empty') + '">' + (form.nome || 'Não informado') + '</div></div>';
-            html += '<div class="field"><div class="field-label">CPF</div><div class="field-value ' + (form.cpf ? '' : 'empty') + '">' + (form.cpf || 'Não informado') + '</div></div>';
-            html += '<div class="field"><div class="field-label">E-mail</div><div class="field-value ' + (form.email ? '' : 'empty') + '">' + (form.email || 'Não informado') + '</div></div>';
-            html += '<div class="field"><div class="field-label">Telefone/WhatsApp</div><div class="field-value ' + (form.telefone ? '' : 'empty') + '">' + (form.telefone || 'Não informado') + '</div></div>';
-            html += '<div class="field"><div class="field-label">Data de Nascimento</div><div class="field-value ' + (form.dataNascimento ? '' : 'empty') + '">' + (form.dataNascimento ? new Date(form.dataNascimento).toLocaleDateString('pt-BR') : 'Não informado') + '</div></div>';
-            html += '<div class="field"><div class="field-label">Idade</div><div class="field-value ' + (form.idade ? '' : 'empty') + '">' + (form.idade || 'Não informado') + '</div></div>';
-            html += '</div>';
-
-            // Seção 3: Dados Específicos por Tipo
+            // Conteúdo específico por tipo de formulário
             if (form.formType === 'agendamento') {
                 html += '<div class="section">';
-                html += '<div class="section-title">🎨 Informações do Projeto Tatuagem</div>';
-                html += '<div class="field"><div class="field-label">Tipo de Serviço</div><div class="field-value ' + (form.tipoServico ? '' : 'empty') + '">' + (form.tipoServico || 'Não informado') + '</div></div>';
-                html += '<div class="field"><div class="field-label">Local do Corpo</div><div class="field-value ' + (form.localTatuagem ? '' : 'empty') + '">' + (form.localTatuagem || 'Não informado') + '</div></div>';
-                html += '<div class="field"><div class="field-label">Tamanho Estimado</div><div class="field-value ' + (form.tamanho ? '' : 'empty') + '">' + (form.tamanho || 'Não informado') + '</div></div>';
-                html += '<div class="field"><div class="field-label">Estilo de Tatuagem</div><div class="field-value ' + (form.estilo ? '' : 'empty') + '">' + (form.estilo || 'Não informado') + '</div></div>';
-                html += '<div class="field"><div class="field-label">Descrição do Projeto</div><div class="field-value ' + (form.descricao ? '' : 'empty') + '" style="white-space: pre-wrap;">' + (form.descricao || 'Não informado') + '</div></div>';
+                html += '<div class="section-title">🎨 Informações do Projeto</div>';
+                if (form.tipoServico) html += '<div class="field"><div class="field-label">Tipo de Serviço</div><div class="field-value">' + form.tipoServico + '</div></div>';
+                if (form.localTatuagem) html += '<div class="field"><div class="field-label">Local do Corpo</div><div class="field-value">' + form.localTatuagem + '</div></div>';
+                if (form.tamanho) html += '<div class="field"><div class="field-label">Tamanho Estimado</div><div class="field-value">' + form.tamanho + '</div></div>';
+                if (form.estilo) html += '<div class="field"><div class="field-label">Estilo</div><div class="field-value">' + form.estilo + '</div></div>';
+                if (form.descricao) html += '<div class="field"><div class="field-label">Descrição do Projeto</div><div class="field-value" style="white-space: pre-wrap;">' + form.descricao + '</div></div>';
                 html += '</div>';
 
                 html += '<div class="section">';
                 html += '<div class="section-title">📅 Preferências de Agendamento</div>';
-                html += '<div class="field"><div class="field-label">Data Preferida</div><div class="field-value ' + (form.dataPreferida ? '' : 'empty') + '">' + (form.dataPreferida ? new Date(form.dataPreferida).toLocaleDateString('pt-BR') : 'Não informado') + '</div></div>';
-                html += '<div class="field"><div class="field-label">Horário Preferido</div><div class="field-value ' + (form.horarioPreferido ? '' : 'empty') + '">' + (form.horarioPreferido || 'Não informado') + '</div></div>';
-                html += '<div class="field"><div class="field-label">Tatuador Preferido</div><div class="field-value ' + (form.tatuadorPreferido ? '' : 'empty') + '">' + (form.tatuadorPreferido || 'Não informado') + '</div></div>';
-                html += '<div class="field"><div class="field-label">Orçamento</div><div class="field-value ' + (form.orcamento ? '' : 'empty') + '">' + (form.orcamento || 'Não informado') + '</div></div>';
+                if (form.dataPreferida) html += '<div class="field"><div class="field-label">Data Preferida</div><div class="field-value">' + new Date(form.dataPreferida).toLocaleDateString('pt-BR') + '</div></div>';
+                if (form.horarioPreferido) html += '<div class="field"><div class="field-label">Horário Preferido</div><div class="field-value">' + form.horarioPreferido + '</div></div>';
+                if (form.tatuadorPreferido) html += '<div class="field"><div class="field-label">Tatuador Preferido</div><div class="field-value">' + form.tatuadorPreferido + '</div></div>';
+                if (form.orcamento) html += '<div class="field"><div class="field-label">Orçamento</div><div class="field-value">' + form.orcamento + '</div></div>';
                 html += '</div>';
             }
 
-            if (form.formType === 'anamnese') {
+            else if (form.formType === 'anamnese') {
                 html += '<div class="section">';
                 html += '<div class="section-title">🏥 Condições de Saúde</div>';
                 if (form.condicoes && form.condicoes.length > 0) {
-                    html += '<div class="field"><div class="field-label">Condições Reportadas:</div>';
+                    html += '<div class="field"><div class="field-label">Condições Reportadas</div><div class="array-items">';
                     form.condicoes.forEach(c => html += '<span class="array-item">' + c + '</span>');
-                    html += '</div>';
+                    html += '</div></div>';
                 } else {
-                    html += '<div class="field"><div class="field-value empty">Nenhuma condição reportada</div></div>';
+                    html += '<div class="field"><div class="field-value empty">Nenhuma condição de saúde reportada</div></div>';
                 }
-                html += '<div class="field"><div class="field-label">Medicações Contínuas</div><div class="field-value ' + (form.medicacoes ? '' : 'empty') + '" style="white-space: pre-wrap;">' + (form.medicacoes || 'Não informado') + '</div></div>';
+                if (form.medicacoes) html += '<div class="field"><div class="field-label">Medicações Contínuas</div><div class="field-value" style="white-space: pre-wrap;">' + form.medicacoes + '</div></div>';
                 html += '</div>';
 
                 html += '<div class="section">';
-                html += '<div class="section-title">💊 Alergias e Reações</div>';
+                html += '<div class="section-title">💊 Alergias</div>';
                 if (form.alergias && form.alergias.length > 0) {
-                    html += '<div class="field"><div class="field-label">Alergias Reportadas:</div>';
+                    html += '<div class="field"><div class="field-label">Alergias Reportadas</div><div class="array-items">';
                     form.alergias.forEach(a => html += '<span class="array-item">' + a + '</span>');
-                    html += '</div>';
+                    html += '</div></div>';
                 } else {
-                    html += '<div class="field"><div class="field-value empty">Sem alergias reportadas</div></div>';
+                    html += '<div class="field"><div class="field-value empty">Nenhuma alergia reportada</div></div>';
                 }
-                html += '<div class="field"><div class="field-label">Reações Alérgicas Anteriores</div><div class="field-value ' + (form.reacoesAlergicas ? '' : 'empty') + '" style="white-space: pre-wrap;">' + (form.reacoesAlergicas || 'Não informado') + '</div></div>';
+                if (form.reacoesAlergicas) html += '<div class="field"><div class="field-label">Reações Alérgicas Anteriores</div><div class="field-value" style="white-space: pre-wrap;">' + form.reacoesAlergicas + '</div></div>';
                 html += '</div>';
 
                 html += '<div class="section">';
-                html += '<div class="section-title">❓ Questões Médicas Específicas</div>';
-                html += '<div class="field"><div class="field-label">Está Grávida?</div><div class="field-value ' + (form.gravidez ? '' : 'empty') + '">' + (form.gravidez || 'Não informado') + '</div></div>';
-                html += '<div class="field"><div class="field-label">Consumiu Álcool nas Últimas 24h?</div><div class="field-value ' + (form.alcool ? '' : 'empty') + '">' + (form.alcool || 'Não informado') + '</div></div>';
-                html += '<div class="field"><div class="field-label">Doação de Sangue nos Últimos 12 Meses?</div><div class="field-value ' + (form.doacao ? '' : 'empty') + '">' + (form.doacao || 'Não informado') + '</div></div>';
-                html += '<div class="field"><div class="field-label">Problemas de Cicatrização?</div><div class="field-value ' + (form.cicatrizacao ? '' : 'empty') + '">' + (form.cicatrizacao || 'Não informado') + '</div></div>';
-                html += '<div class="field"><div class="field-label">Problemas de Coagulação?</div><div class="field-value ' + (form.coagulacao ? '' : 'empty') + '">' + (form.coagulacao || 'Não informado') + '</div></div>';
+                html += '<div class="section-title">❓ Questões Médicas</div>';
+                if (form.gravidez === 'sim') html += '<div class="warning-box"><strong>⚠️ Atenção:</strong> Cliente está grávida</div>';
+                if (form.alcool === 'sim') html += '<div class="warning-box"><strong>⚠️ Atenção:</strong> Consumiu álcool nas últimas 24h</div>';
+                if (form.doacao === 'sim') html += '<div class="info-box"><strong>ℹ️ Info:</strong> Doou sangue nos últimos 12 meses</div>';
+                if (form.cicatrizacao) html += '<div class="field"><div class="field-label">Problemas de Cicatrização</div><div class="field-value">' + form.cicatrizacao + '</div></div>';
+                if (form.coagulacao) html += '<div class="field"><div class="field-label">Problemas de Coagulação</div><div class="field-value">' + form.coagulacao + '</div></div>';
                 html += '</div>';
             }
 
-            if (form.formType === 'consentimento') {
+            else if (form.formType === 'consentimento') {
                 html += '<div class="section">';
                 html += '<div class="section-title">✅ Termo de Consentimento</div>';
-                html += '<div class="field"><div class="field-label">Consentimento Fornecido?</div><div class="field-value">' + (form.assinatura ? '✓ SIM - Assinado digitalmente' : '❌ NÃO ASSINADO') + '</div></div>';
-                html += '<div class="field"><div class="field-label">Data da Assinatura</div><div class="field-value ' + (form.dataAssinatura ? '' : 'empty') + '">' + (form.dataAssinatura ? new Date(form.dataAssinatura).toLocaleString('pt-BR') : 'Não assinado') + '</div></div>';
-                html += '</div>';
-            }
-
-            if (form.formType === 'uso-imagem') {
-                html += '<div class="section">';
-                html += '<div class="section-title">📸 Autorização de Uso de Imagem</div>';
-                if (form.preferencias) {
-                    if (form.preferencias.redes) {
-                        html += '<div class="field"><div class="field-label">Redes Sociais Autorizadas:</div>';
-                        let temAutorizacao = false;
-                        Object.entries(form.preferencias.redes).forEach(([rede, autorizado]) => {
-                            if (autorizado) {
-                                html += '<span class="array-item">' + rede + '</span>';
-                                temAutorizacao = true;
-                            }
-                        });
-                        if (!temAutorizacao) {
-                            html += '<div class="field-value empty">Nenhuma rede autorizada</div>';
-                        }
-                        html += '</div>';
-                    }
-                    html += '<div class="field"><div class="field-label">Visibilidade do Rosto</div><div class="field-value ' + (form.preferencias.visibilidade ? '' : 'empty') + '">' + (form.preferencias.visibilidade || 'Não informado') + '</div></div>';
-                    html += '<div class="field"><div class="field-label">Autorização de Identificação</div><div class="field-value ' + (form.preferencias.identificacao ? '' : 'empty') + '">' + (form.preferencias.identificacao || 'Não informado') + '</div></div>';
+                if (form.assinatura) {
+                    html += '<div class="success-box"><strong>✓ Consentimento Fornecido</strong><br>Assinado digitalmente em ' + (form.dataAssinatura ? new Date(form.dataAssinatura).toLocaleString('pt-BR') : (form.timestamp ? new Date(form.timestamp).toLocaleString('pt-BR') : 'data desconhecida')) + '</div>';
+                } else {
+                    html += '<div class="warning-box"><strong>❌ Atenção:</strong> Consentimento NÃO assinado</div>';
+                }
+                if (form.assinatura) {
+                    html += '<div class="field"><div class="field-label">Assinatura Digital</div><div class="field-value"><img src="' + form.assinatura + '" style="max-width: 100%; border: 1px solid #ddd; padding: 10px; background: white;" alt="Assinatura"></div></div>';
                 }
                 html += '</div>';
             }
 
-            // Seção: Todos os Outros Campos (catch-all para qualquer campo não mapeado)
-            html += '<div class="section">';
-            html += '<div class="section-title">📝 Todos os Dados Adicionais</div>';
-            const camposIgnorados = ['nome', 'cpf', 'email', 'telefone', 'dataNascimento', 'idade', 'tipoServico', 'localTatuagem', 'tamanho', 'estilo', 'descricao', 'dataPreferida', 'horarioPreferido', 'tatuadorPreferido', 'orcamento', 'condicoes', 'medicacoes', 'alergias', 'reacoesAlergicas', 'gravidez', 'alcool', 'doacao', 'cicatrizacao', 'coagulacao', 'assinatura', 'dataAssinatura', 'preferencias', 'formType', 'timestamp', 'createdAt', 'formId', 'id', 'status', 'updatedAt', 'firebaseId'];
-            let temOutrosCampos = false;
-            
-            for (const [chave, valor] of Object.entries(form)) {
-                if (!camposIgnorados.includes(chave) && valor !== null && valor !== undefined && valor !== '') {
-                    temOutrosCampos = true;
-                    html += '<div class="field">';
-                    html += '<div class="field-label">' + chave.replace(/([A-Z])/g, ' $1').trim() + '</div>';
-                    
-                    if (typeof valor === 'object') {
-                        html += '<div class="object-value">' + JSON.stringify(valor, null, 2).replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>';
-                    } else if (Array.isArray(valor)) {
-                        html += '<div>';
-                        valor.forEach(item => {
-                            html += '<span class="array-item">' + item + '</span>';
-                        });
-                        html += '</div>';
+            else if (form.formType === 'uso-imagem') {
+                html += '<div class="section">';
+                html += '<div class="section-title">📸 Autorização de Uso de Imagem</div>';
+                
+                if (form.preferencias && form.preferencias.redes) {
+                    html += '<div class="field"><div class="field-label">Redes Sociais Autorizadas</div><div class="array-items">';
+                    let temAutorizacao = false;
+                    Object.entries(form.preferencias.redes).forEach(([rede, autorizado]) => {
+                        if (autorizado) {
+                            html += '<span class="array-item">' + rede.toUpperCase() + '</span>';
+                            temAutorizacao = true;
+                        }
+                    });
+                    if (!temAutorizacao) {
+                        html += '</div><div class="field-value empty">Nenhuma rede social autorizada</div>';
                     } else {
-                        html += '<div class="field-value" style="white-space: pre-wrap;">' + (valor ? valor.toString() : 'Vazio') + '</div>';
+                        html += '</div>';
                     }
                     html += '</div>';
                 }
+                
+                if (form.preferencias) {
+                    if (form.preferencias.visibilidade) {
+                        html += '<div class="field"><div class="field-label">Visibilidade do Rosto</div><div class="field-value">' + form.preferencias.visibilidade + '</div></div>';
+                    }
+                    if (form.preferencias.identificacao) {
+                        html += '<div class="field"><div class="field-label">Autorização de Identificação</div><div class="field-value">' + form.preferencias.identificacao + '</div></div>';
+                    }
+                }
+                html += '</div>';
             }
-            
-            if (!temOutrosCampos) {
-                html += '<div class="field-value empty">Nenhum campo adicional</div>';
-            }
+
+            // Rodapé com informações
+            html += '<div class="footer-info">';
+            html += '<strong>Data de Preenchimento:</strong> ' + (form.timestamp ? new Date(form.timestamp).toLocaleString('pt-BR') : (form.createdAt ? new Date(form.createdAt).toLocaleString('pt-BR') : 'N/A')) + '<br>';
+            html += '<strong>Status:</strong> ' + (form.status || 'novo').toUpperCase();
             html += '</div>';
 
-            // Seção: JSON Bruto (para referência técnica)
-            html += '<div class="section">';
-            html += '<div class="section-title">🔧 Dados Brutos em JSON</div>';
-            html += '<div class="raw-data">' + JSON.stringify(form, null, 2).replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>';
-            html += '</div>';
-
-            html += '<div class="data-info"><strong>ID:</strong> ' + (form.formId || form.id || 'N/A') + '<br>';
-            html += '<strong>Preenchido em:</strong> ' + (form.timestamp ? new Date(form.timestamp).toLocaleString('pt-BR') : (form.createdAt ? new Date(form.createdAt).toLocaleString('pt-BR') : 'Desconhecido')) + '</div>';
-            html += '<button class="print-btn" onclick="window.print()">🖨️ Imprimir Ficha Completa</button>';
+            html += '<button class="print-btn" onclick="window.print()">🖨️ Imprimir Ficha</button>';
             html += '</div></div></body></html>';
 
             modal.document.write(html);
