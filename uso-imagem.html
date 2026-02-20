@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autorização de Uso de Imagem - Estúdio de Tatuagem</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-camera"></i>
+                <h1>Autorização de Uso de Imagem</h1>
+            </div>
+            <p class="subtitle">Divulgação em Redes Sociais e Portfólio</p>
+        </header>
+
+        <main class="main-content">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2><i class="fas fa-images"></i> Termo de Autorização de Uso de Imagem</h2>
+                    <p>Autorize o estúdio a divulgar fotos do seu trabalho</p>
+                </div>
+
+                <div class="alert" style="background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; margin-bottom: 25px;">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Informação:</strong> Este formulário é OPCIONAL. Você não é obrigado(a) a autorizar o uso de imagens. 
+                    A autorização ajuda o estúdio a divulgar seu trabalho e construir um portfólio.
+                </div>
+
+                <form id="imagemForm">
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">
+                        <i class="fas fa-user"></i> Identificação
+                    </h3>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo <span class="required">*</span></label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cpf">CPF <span class="required">*</span></label>
+                            <input type="text" id="cpf" name="cpf" maxlength="14" 
+                                   onkeyup="formatCPF(this)" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="rg">RG <span class="required">*</span></label>
+                            <input type="text" id="rg" name="rg" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mail <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+
+                    <hr style="margin: 30px 0; border: none; border-top: 2px solid #eee;">
+
+                    <div style="background: #f8f9fa; padding: 25px; border-radius: 10px; border-left: 4px solid var(--accent-color); margin-bottom: 25px;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 15px;">
+                            <i class="fas fa-gavel"></i> TERMO DE AUTORIZAÇÃO
+                        </h3>
+
+                        <div style="max-height: 350px; overflow-y: auto; padding-right: 15px; line-height: 1.8;">
+                            <p style="margin-bottom: 15px;">
+                                Eu, <strong>________________________</strong>, inscrito(a) no CPF sob o nº <strong>_______________</strong>, 
+                                portador(a) do RG nº <strong>_______________</strong>, AUTORIZO o uso da minha imagem relacionada ao 
+                                procedimento de tatuagem/piercing/micropigmentação realizado no estabelecimento 
+                                <strong>[NOME DO ESTÚDIO]</strong>.
+                            </p>
+
+                            <p style="margin-bottom: 15px;"><strong>1. OBJETO DA AUTORIZAÇÃO</strong></p>
+                            <p style="margin-bottom: 15px;">
+                                A autorização compreende o uso, publicação e reprodução de fotografias e/ou vídeos do procedimento 
+                                realizado e do resultado final do trabalho artístico.
+                            </p>
+
+                            <p style="margin-bottom: 15px;"><strong>2. FINALIDADES AUTORIZADAS</strong></p>
+                            <p style="margin-bottom: 15px;">
+                                As imagens poderão ser utilizadas para:
+                            </p>
+                            <ul style="margin-left: 20px; margin-bottom: 15px;">
+                                <li>Divulgação em redes sociais (Instagram, Facebook, TikTok, etc.);</li>
+                                <li>Portfólio profissional do artista/estúdio;</li>
+                                <li>Website e materiais de marketing do estúdio;</li>
+                                <li>Participação em concursos e eventos da área;</li>
+                                <li>Publicações em revistas especializadas;</li>
+                                <li>Material institucional e promocional.</li>
+                            </ul>
+
+                            <p style="margin-bottom: 15px;"><strong>3. DIREITOS DO CLIENTE</strong></p>
+                            <ul style="margin-left: 20px; margin-bottom: 15px;">
+                                <li>As imagens serão usadas de forma respeitosa e profissional;</li>
+                                <li>O estúdio se compromete a não distorcer ou alterar as imagens de forma a prejudicar a honra e reputação do cliente;</li>
+                                <li>O cliente poderá solicitar a remoção das imagens a qualquer momento;</li>
+                                <li>O rosto do cliente pode ser ocultado mediante solicitação;</li>
+                                <li>Esta autorização não gera direito a qualquer remuneração ou compensação financeira.</li>
+                            </ul>
+
+                            <p style="margin-bottom: 15px;"><strong>4. PRAZO E TERRITÓRIO</strong></p>
+                            <p style="margin-bottom: 15px;">
+                                Esta autorização é válida por tempo indeterminado e em todo território nacional e internacional, 
+                                podendo ser revogada a qualquer momento mediante comunicação por escrito ao estúdio.
+                            </p>
+
+                            <p style="margin-bottom: 15px;"><strong>5. PROTEÇÃO DE DADOS</strong></p>
+                            <p style="margin-bottom: 15px;">
+                                O estúdio se compromete a tratar os dados pessoais em conformidade com a Lei Geral de Proteção de Dados 
+                                (LGPD - Lei 13.709/2018).
+                            </p>
+
+                            <p style="margin-bottom: 15px;"><strong>6. REVOGAÇÃO</strong></p>
+                            <p style="margin-bottom: 15px;">
+                                O cliente pode revogar esta autorização a qualquer momento, solicitando a remoção das imagens em até 30 dias. 
+                                Imagens já publicadas em materiais impressos ou compartilhadas por terceiros podem não ser removíveis.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">
+                        <i class="fas fa-sliders-h"></i> Preferências de Divulgação
+                    </h3>
+
+                    <div class="form-group">
+                        <label style="font-weight: 600; font-size: 1.05rem;">Autorizo a divulgação das imagens em: 
+                            <span class="required">*</span> (Marque todas que se aplicam)
+                        </label>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="instagram" name="instagram">
+                            <label for="instagram" style="font-weight: normal;">
+                                <i class="fab fa-instagram"></i> Instagram
+                            </label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="facebook" name="facebook">
+                            <label for="facebook" style="font-weight: normal;">
+                                <i class="fab fa-facebook"></i> Facebook
+                            </label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="tiktok" name="tiktok">
+                            <label for="tiktok" style="font-weight: normal;">
+                                <i class="fab fa-tiktok"></i> TikTok
+                            </label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="website" name="website">
+                            <label for="website" style="font-weight: normal;">
+                                <i class="fas fa-globe"></i> Website/Blog
+                            </label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="portfolio" name="portfolio">
+                            <label for="portfolio" style="font-weight: normal;">
+                                <i class="fas fa-briefcase"></i> Portfólio profissional
+                            </label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="eventos" name="eventos">
+                            <label for="eventos" style="font-weight: normal;">
+                                <i class="fas fa-trophy"></i> Concursos e eventos
+                            </label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="publicacoes" name="publicacoes">
+                            <label for="publicacoes" style="font-weight: normal;">
+                                <i class="fas fa-newspaper"></i> Publicações e revistas
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Como gostaria que seu rosto aparecesse nas fotos? <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <input type="radio" id="rostoCompleto" name="rosto" value="completo" required>
+                            <label for="rostoCompleto" style="font-weight: normal;">
+                                Rosto completo visível
+                            </label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="rostoParcial" name="rosto" value="parcial">
+                            <label for="rostoParcial" style="font-weight: normal;">
+                                Rosto parcialmente visível (perfil, de longe, etc.)
+                            </label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="rostoOculto" name="rosto" value="oculto">
+                            <label for="rostoOculto" style="font-weight: normal;">
+                                Rosto oculto (apenas a tatuagem/piercing)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Posso ser identificado(a) pelo nome nas publicações? <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <input type="radio" id="nomeCompleto" name="identificacao" value="completo" required>
+                            <label for="nomeCompleto" style="font-weight: normal;">
+                                Sim, nome completo
+                            </label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="nomePrimeiro" name="identificacao" value="primeiro">
+                            <label for="nomePrimeiro" style="font-weight: normal;">
+                                Apenas primeiro nome
+                            </label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="nomeIniciais" name="identificacao" value="iniciais">
+                            <label for="nomeIniciais" style="font-weight: normal;">
+                                Apenas iniciais
+                            </label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="nomeNao" name="identificacao" value="nao">
+                            <label for="nomeNao" style="font-weight: normal;">
+                                Não, prefiro anonimato
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Autorizo marcação em redes sociais (tag)?</label>
+                        <div class="checkbox-group">
+                            <input type="radio" id="tagSim" name="tag" value="sim">
+                            <label for="tagSim" style="font-weight: normal;">Sim</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="tagNao" name="tag" value="nao" checked>
+                            <label for="tagNao" style="font-weight: normal;">Não</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="redesSociaisField" style="display: none;">
+                        <label for="redesSociais">Seu @ nas redes sociais (Instagram, TikTok, etc.)</label>
+                        <input type="text" id="redesSociais" name="redesSociais" 
+                               placeholder="@seuusuario">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="observacoes">Observações ou Restrições Adicionais</label>
+                        <textarea id="observacoes" name="observacoes" rows="4" 
+                                  placeholder="Ex: Não publicar em dias/horários específicos, não usar em determinado contexto, etc."></textarea>
+                    </div>
+
+                    <hr style="margin: 30px 0; border: none; border-top: 2px solid #eee;">
+
+                    <div class="alert alert-success" style="margin-bottom: 20px;">
+                        <i class="fas fa-heart"></i>
+                        <strong>Obrigado!</strong> Ao autorizar o uso de imagens, você ajuda o estúdio a crescer e divulgar 
+                        a arte da tatuagem. Seu trabalho pode inspirar outras pessoas!
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="liAutorizacao" required>
+                        <label for="liAutorizacao" style="font-weight: normal;">
+                            Li e compreendi todos os termos desta Autorização de Uso de Imagem <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="concordoAutorizacao" required>
+                        <label for="concordoAutorizacao" style="font-weight: normal;">
+                            Autorizo voluntariamente o uso das minhas imagens conforme descrito acima <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <hr style="margin: 30px 0; border: none; border-top: 2px solid #eee;">
+
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">
+                        <i class="fas fa-signature"></i> Assinatura Digital
+                    </h3>
+
+                    <div class="form-group">
+                        <label>Assine no campo abaixo <span class="required">*</span></label>
+                        <canvas id="signatureCanvas" class="signature-pad" width="600" height="200"></canvas>
+                        <div class="signature-actions">
+                            <button type="button" class="btn-clear" onclick="clearSignature()">
+                                <i class="fas fa-eraser"></i> Limpar Assinatura
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dataAssinatura">Data <span class="required">*</span></label>
+                        <input type="date" id="dataAssinatura" name="dataAssinatura" required readonly>
+                    </div>
+
+                    <div class="form-actions" style="margin-top: 40px;">
+                        <button type="button" class="btn btn-back" onclick="goBack()">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </button>
+                        <button type="button" class="btn" style="background: #6c757d;" onclick="printForm()">
+                            <i class="fas fa-print"></i> Imprimir
+                        </button>
+                        <button type="submit" class="btn btn-submit">
+                            <i class="fas fa-check-circle"></i> Confirmar Autorização
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Estúdio de Tatuagem & Piercing</p>
+        </footer>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    
+    <script src="script.js"></script>
+    <script>
+        // Inicializar Firebase
+        initFirebase();
+        // Inicializar assinatura
+        let signaturePad;
+
+        window.addEventListener('load', function() {
+            signaturePad = new SignaturePad('signatureCanvas');
+            
+            // Definir data atual
+            const hoje = new Date().toISOString().split('T')[0];
+            document.getElementById('dataAssinatura').value = hoje;
+        });
+
+        function clearSignature() {
+            signaturePad.clear();
+        }
+
+        // Mostrar campo de redes sociais se autorizar tag
+        document.querySelectorAll('input[name="tag"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const redesField = document.getElementById('redesSociaisField');
+                redesField.style.display = this.value === 'sim' ? 'block' : 'none';
+            });
+        });
+
+        // Submissão do formulário
+        document.getElementById('imagemForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!validateForm('imagemForm')) {
+                showErrorMessage('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+
+            // Validar CPF
+            const cpf = document.getElementById('cpf').value;
+            if (!validateCPF(cpf)) {
+                showErrorMessage('CPF inválido. Por favor, verifique.');
+                return;
+            }
+
+            // Verificar se pelo menos uma plataforma foi selecionada
+            const plataformas = ['instagram', 'facebook', 'tiktok', 'website', 'portfolio', 'eventos', 'publicacoes'];
+            const algumaSelecionada = plataformas.some(p => document.getElementById(p).checked);
+            
+            if (!algumaSelecionada) {
+                showErrorMessage('Por favor, selecione pelo menos uma plataforma para divulgação.');
+                return;
+            }
+
+            // Verificar assinatura
+            if (signaturePad.isEmpty()) {
+                showErrorMessage('Por favor, assine no campo de assinatura.');
+                return;
+            }
+
+            const formData = {
+                nome: document.getElementById('nome').value,
+                cpf: cpf,
+                rg: document.getElementById('rg').value,
+                email: document.getElementById('email').value,
+                autorizacoes: {
+                    instagram: document.getElementById('instagram').checked,
+                    facebook: document.getElementById('facebook').checked,
+                    tiktok: document.getElementById('tiktok').checked,
+                    website: document.getElementById('website').checked,
+                    portfolio: document.getElementById('portfolio').checked,
+                    eventos: document.getElementById('eventos').checked,
+                    publicacoes: document.getElementById('publicacoes').checked
+                },
+                preferencias: {
+                    rosto: document.querySelector('input[name="rosto"]:checked').value,
+                    identificacao: document.querySelector('input[name="identificacao"]:checked').value,
+                    tag: document.querySelector('input[name="tag"]:checked').value,
+                    redesSociais: document.getElementById('redesSociais').value
+                },
+                observacoes: document.getElementById('observacoes').value,
+                dataAssinatura: document.getElementById('dataAssinatura').value,
+                assinatura: signaturePad.toDataURL(),
+                formId: generateFormId()
+            };
+
+            // Salvar dados
+            await saveFormData('uso-imagem', formData);
+
+            showSuccessMessage(`Autorização registrada com sucesso! Protocolo: ${formData.formId}. Obrigado por nos apoiar!`);
+
+            setTimeout(() => {
+                this.reset();
+                window.location.href = 'index.html';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

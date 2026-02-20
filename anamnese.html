@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anamnese - Histórico de Saúde</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <h1>Anamnese</h1>
+            </div>
+            <p class="subtitle">Histórico de Saúde</p>
+        </header>
+
+        <main class="main-content">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2><i class="fas fa-file-medical"></i> Questionário de Saúde</h2>
+                    <p>Suas informações são confidenciais e essenciais para sua segurança</p>
+                </div>
+
+                <div class="alert" style="background: #fff3cd; color: #856404; border: 1px solid #ffeeba; margin-bottom: 20px;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Importante:</strong> Este formulário é obrigatório e confidencial. As informações fornecidas são protegidas pela LGPD e utilizadas apenas para garantir sua segurança durante o procedimento.
+                </div>
+
+                <form id="anamneseForm">
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">
+                        <i class="fas fa-user"></i> Identificação
+                    </h3>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo <span class="required">*</span></label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dataNascimento">Data de Nascimento <span class="required">*</span></label>
+                            <input type="date" id="dataNascimento" name="dataNascimento" required>
+                        </div>
+                    </div>
+
+                    <hr style="margin: 30px 0; border: none; border-top: 2px solid #eee;">
+
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">
+                        <i class="fas fa-pills"></i> Condições de Saúde
+                    </h3>
+
+                    <div class="form-group">
+                        <label style="font-weight: 600; font-size: 1.05rem;">Você possui alguma das seguintes condições? (Marque todas que se aplicam)</label>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="diabetes" name="diabetes">
+                            <label for="diabetes" style="font-weight: normal;">Diabetes</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="hipertensao" name="hipertensao">
+                            <label for="hipertensao" style="font-weight: normal;">Hipertensão (pressão alta)</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="cardiopatia" name="cardiopatia">
+                            <label for="cardiopatia" style="font-weight: normal;">Problemas cardíacos</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="hemofilia" name="hemofilia">
+                            <label for="hemofilia" style="font-weight: normal;">Hemofilia ou distúrbios de coagulação</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="epilepsia" name="epilepsia">
+                            <label for="epilepsia" style="font-weight: normal;">Epilepsia</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="hepatite" name="hepatite">
+                            <label for="hepatite" style="font-weight: normal;">Hepatite (A, B ou C)</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="hiv" name="hiv">
+                            <label for="hiv" style="font-weight: normal;">HIV/AIDS</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="anemia" name="anemia">
+                            <label for="anemia" style="font-weight: normal;">Anemia</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="queloides" name="queloides">
+                            <label for="queloides" style="font-weight: normal;">Tendência a queloides (cicatrizes elevadas)</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="psoríase" name="psoríase">
+                            <label for="psoríase" style="font-weight: normal;">Psoríase, eczema ou outras doenças de pele</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="vitiligo" name="vitiligo">
+                            <label for="vitiligo" style="font-weight: normal;">Vitiligo</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="cancer" name="cancer">
+                            <label for="cancer" style="font-weight: normal;">Câncer ou em tratamento oncológico</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="autoimune" name="autoimune">
+                            <label for="autoimune" style="font-weight: normal;">Doenças autoimunes (lúpus, artrite reumatoide, etc.)</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="nenhuma" name="nenhuma">
+                            <label for="nenhuma" style="font-weight: normal;"><strong>Nenhuma das anteriores</strong></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="outrasCondicoes">Outras condições de saúde não listadas acima</label>
+                        <textarea id="outrasCondicoes" name="outrasCondicoes" rows="3" 
+                                  placeholder="Descreva outras condições relevantes..."></textarea>
+                    </div>
+
+                    <hr style="margin: 30px 0; border: none; border-top: 2px solid #eee;">
+
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">
+                        <i class="fas fa-prescription-bottle-alt"></i> Medicamentos e Alergias
+                    </h3>
+
+                    <div class="form-group">
+                        <label>Você faz uso regular de algum medicamento? <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <input type="radio" id="medSim" name="usaMedicamento" value="sim" required>
+                            <label for="medSim" style="font-weight: normal;">Sim</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="medNao" name="usaMedicamento" value="nao">
+                            <label for="medNao" style="font-weight: normal;">Não</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="medicamentosDetalhes" style="display: none;">
+                        <label for="medicamentos">Quais medicamentos? (Incluindo anticoagulantes, corticoides, isotretinoína/Roacutan)</label>
+                        <textarea id="medicamentos" name="medicamentos" rows="3" 
+                                  placeholder="Liste todos os medicamentos que você toma regularmente..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Você possui alergia a algum dos seguintes? (Marque todas que se aplicam)</label>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="alergiaLatex" name="alergiaLatex">
+                            <label for="alergiaLatex" style="font-weight: normal;">Látex</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="alergiaAnestesico" name="alergiaAnestesico">
+                            <label for="alergiaAnestesico" style="font-weight: normal;">Anestésicos (lidocaína, xilocaína, etc.)</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="alergiaMetais" name="alergiaMetais">
+                            <label for="alergiaMetais" style="font-weight: normal;">Metais (níquel, aço inoxidável, etc.)</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="alergiaIodo" name="alergiaIodo">
+                            <label for="alergiaIodo" style="font-weight: normal;">Iodo</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="alergiaTinta" name="alergiaTinta">
+                            <label for="alergiaTinta" style="font-weight: normal;">Tintas ou pigmentos</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="semAlergia" name="semAlergia">
+                            <label for="semAlergia" style="font-weight: normal;"><strong>Não possuo alergias conhecidas</strong></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="outrasAlergias">Outras alergias (medicamentos, alimentos, etc.)</label>
+                        <textarea id="outrasAlergias" name="outrasAlergias" rows="3" 
+                                  placeholder="Descreva outras alergias..."></textarea>
+                    </div>
+
+                    <hr style="margin: 30px 0; border: none; border-top: 2px solid #eee;">
+
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">
+                        <i class="fas fa-syringe"></i> Questões Específicas
+                    </h3>
+
+                    <div class="form-group">
+                        <label>Está grávida ou amamentando? <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <input type="radio" id="gravidaSim" name="gravida" value="sim" required>
+                            <label for="gravidaSim" style="font-weight: normal;">Sim</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="gravidaNao" name="gravida" value="nao">
+                            <label for="gravidaNao" style="font-weight: normal;">Não</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="gravidaNA" name="gravida" value="na">
+                            <label for="gravidaNA" style="font-weight: normal;">Não se aplica</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Consumiu bebida alcoólica nas últimas 24 horas? <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <input type="radio" id="alcoolSim" name="alcool" value="sim" required>
+                            <label for="alcoolSim" style="font-weight: normal;">Sim</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="alcoolNao" name="alcool" value="nao">
+                            <label for="alcoolNao" style="font-weight: normal;">Não</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fez doação de sangue nos últimos 12 meses? <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <input type="radio" id="doacaoSim" name="doacao" value="sim" required>
+                            <label for="doacaoSim" style="font-weight: normal;">Sim</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="doacaoNao" name="doacao" value="nao">
+                            <label for="doacaoNao" style="font-weight: normal;">Não</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Realizou cirurgia recentemente (últimos 6 meses)? <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <input type="radio" id="cirurgiaSim" name="cirurgia" value="sim" required>
+                            <label for="cirurgiaSim" style="font-weight: normal;">Sim</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="cirurgiaNao" name="cirurgia" value="nao">
+                            <label for="cirurgiaNao" style="font-weight: normal;">Não</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="cirurgiaDetalhes" style="display: none;">
+                        <label for="qualCirurgia">Qual cirurgia?</label>
+                        <input type="text" id="qualCirurgia" name="qualCirurgia" 
+                               placeholder="Descreva o tipo de cirurgia...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Possui marca-passo, implantes metálicos ou próteses? <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <input type="radio" id="implantesSim" name="implantes" value="sim" required>
+                            <label for="implantesSim" style="font-weight: normal;">Sim</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="radio" id="implantesNao" name="implantes" value="nao">
+                            <label for="implantesNao" style="font-weight: normal;">Não</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="informacoesAdicionais">Informações Adicionais</label>
+                        <textarea id="informacoesAdicionais" name="informacoesAdicionais" rows="4" 
+                                  placeholder="Qualquer outra informação que considere relevante para sua segurança..."></textarea>
+                    </div>
+
+                    <hr style="margin: 30px 0; border: none; border-top: 2px solid #eee;">
+
+                    <div class="alert" style="background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb;">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Declaração:</strong> Declaro que as informações fornecidas acima são verdadeiras e completas. Estou ciente de que omitir informações pode comprometer minha saúde e segurança durante o procedimento.
+                    </div>
+
+                    <div class="checkbox-group" style="margin-top: 20px;">
+                        <input type="checkbox" id="declaracao" required>
+                        <label for="declaracao" style="font-weight: normal;">
+                            Confirmo que todas as informações são verdadeiras <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-back" onclick="goBack()">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </button>
+                        <button type="submit" class="btn btn-submit">
+                            <i class="fas fa-check"></i> Enviar Anamnese
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Estúdio de Tatuagem & Piercing</p>
+        </footer>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    
+    <script src="script.js"></script>
+    <script>
+        // Inicializar Firebase
+        initFirebase();
+        // Mostrar campo de detalhes de medicamentos
+        document.querySelectorAll('input[name="usaMedicamento"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const detalhes = document.getElementById('medicamentosDetalhes');
+                detalhes.style.display = this.value === 'sim' ? 'block' : 'none';
+            });
+        });
+
+        // Mostrar campo de detalhes de cirurgia
+        document.querySelectorAll('input[name="cirurgia"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const detalhes = document.getElementById('cirurgiaDetalhes');
+                detalhes.style.display = this.value === 'sim' ? 'block' : 'none';
+            });
+        });
+
+        // Desmarcar outras condições quando "Nenhuma" é selecionada
+        document.getElementById('nenhuma').addEventListener('change', function() {
+            if (this.checked) {
+                const checkboxes = document.querySelectorAll('input[type="checkbox"][name="diabetes"], input[type="checkbox"][name="hipertensao"], input[type="checkbox"][name="cardiopatia"], input[type="checkbox"][name="hemofilia"], input[type="checkbox"][name="epilepsia"], input[type="checkbox"][name="hepatite"], input[type="checkbox"][name="hiv"], input[type="checkbox"][name="anemia"], input[type="checkbox"][name="queloides"], input[type="checkbox"][name="psoríase"], input[type="checkbox"][name="vitiligo"], input[type="checkbox"][name="cancer"], input[type="checkbox"][name="autoimune"]');
+                checkboxes.forEach(cb => cb.checked = false);
+            }
+        });
+
+        // Desmarcar "Nenhuma" quando outra condição é selecionada
+        document.querySelectorAll('input[type="checkbox"][name="diabetes"], input[type="checkbox"][name="hipertensao"], input[type="checkbox"][name="cardiopatia"], input[type="checkbox"][name="hemofilia"], input[type="checkbox"][name="epilepsia"], input[type="checkbox"][name="hepatite"], input[type="checkbox"][name="hiv"], input[type="checkbox"][name="anemia"], input[type="checkbox"][name="queloides"], input[type="checkbox"][name="psoríase"], input[type="checkbox"][name="vitiligo"], input[type="checkbox"][name="cancer"], input[type="checkbox"][name="autoimune"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    document.getElementById('nenhuma').checked = false;
+                }
+            });
+        });
+
+        // Mesma lógica para alergias
+        document.getElementById('semAlergia').addEventListener('change', function() {
+            if (this.checked) {
+                document.querySelectorAll('input[type="checkbox"][name="alergiaLatex"], input[type="checkbox"][name="alergiaAnestesico"], input[type="checkbox"][name="alergiaMetais"], input[type="checkbox"][name="alergiaIodo"], input[type="checkbox"][name="alergiaTinta"]').forEach(cb => cb.checked = false);
+            }
+        });
+
+        document.querySelectorAll('input[type="checkbox"][name="alergiaLatex"], input[type="checkbox"][name="alergiaAnestesico"], input[type="checkbox"][name="alergiaMetais"], input[type="checkbox"][name="alergiaIodo"], input[type="checkbox"][name="alergiaTinta"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    document.getElementById('semAlergia').checked = false;
+                }
+            });
+        });
+
+        // Submissão do formulário
+        document.getElementById('anamneseForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = {
+                nome: document.getElementById('nome').value,
+                dataNascimento: document.getElementById('dataNascimento').value,
+                diabetes: document.getElementById('diabetes').checked,
+                hipertensao: document.getElementById('hipertensao').checked,
+                cardiopatia: document.getElementById('cardiopatia').checked,
+                hemofilia: document.getElementById('hemofilia').checked,
+                epilepsia: document.getElementById('epilepsia').checked,
+                hepatite: document.getElementById('hepatite').checked,
+                hiv: document.getElementById('hiv').checked,
+                anemia: document.getElementById('anemia').checked,
+                queloides: document.getElementById('queloides').checked,
+                psoríase: document.getElementById('psoríase').checked,
+                vitiligo: document.getElementById('vitiligo').checked,
+                cancer: document.getElementById('cancer').checked,
+                autoimune: document.getElementById('autoimune').checked,
+                nenhumaCondicao: document.getElementById('nenhuma').checked,
+                outrasCondicoes: document.getElementById('outrasCondicoes').value,
+                usaMedicamento: document.querySelector('input[name="usaMedicamento"]:checked').value,
+                medicamentos: document.getElementById('medicamentos').value,
+                alergiaLatex: document.getElementById('alergiaLatex').checked,
+                alergiaAnestesico: document.getElementById('alergiaAnestesico').checked,
+                alergiaMetais: document.getElementById('alergiaMetais').checked,
+                alergiaIodo: document.getElementById('alergiaIodo').checked,
+                alergiaTinta: document.getElementById('alergiaTinta').checked,
+                semAlergia: document.getElementById('semAlergia').checked,
+                outrasAlergias: document.getElementById('outrasAlergias').value,
+                gravida: document.querySelector('input[name="gravida"]:checked').value,
+                alcool: document.querySelector('input[name="alcool"]:checked').value,
+                doacao: document.querySelector('input[name="doacao"]:checked').value,
+                cirurgia: document.querySelector('input[name="cirurgia"]:checked').value,
+                qualCirurgia: document.getElementById('qualCirurgia').value,
+                implantes: document.querySelector('input[name="implantes"]:checked').value,
+                informacoesAdicionais: document.getElementById('informacoesAdicionais').value,
+                formId: generateFormId()
+            };
+
+            // Verificar condições que impedem o procedimento
+            if (formData.gravida === 'sim') {
+                showErrorMessage('Importante: Gestantes não podem realizar tatuagens ou piercings. Entre em contato conosco após o período de gestação e amamentação.');
+                return;
+            }
+
+            if (formData.alcool === 'sim') {
+                showErrorMessage('Por segurança, não realizamos procedimentos em pessoas que consumiram álcool nas últimas 24 horas. Por favor, reagende.');
+                return;
+            }
+
+            // Salvar dados
+            await saveFormData('anamnese', formData);
+
+            showSuccessMessage(`Anamnese registrada com sucesso! ID: ${formData.formId}`);
+
+            setTimeout(() => {
+                this.reset();
+                window.location.href = 'index.html';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin - Estúdio de Tatuagem</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .login-container {
+            max-width: 450px;
+            margin: 100px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header i {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .login-header h2 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .login-form {
+            margin-top: 30px;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .loading i {
+            font-size: 2rem;
+            color: var(--accent-color);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="login-header">
+                <i class="fas fa-shield-alt"></i>
+                <h2>Área Administrativa</h2>
+                <p style="color: #666;">Faça login para acessar os formulários</p>
+            </div>
+
+            <div id="errorMessage" class="error-message">
+                <i class="fas fa-exclamation-circle"></i> <span id="errorText"></span>
+            </div>
+
+            <div class="loading" id="loading">
+                <i class="fas fa-circle-notch"></i>
+                <p>Entrando...</p>
+            </div>
+
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> E-mail
+                    </label>
+                    <input type="email" id="email" name="email" 
+                           placeholder="seu@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Senha
+                    </label>
+                    <input type="password" id="password" name="password" 
+                           placeholder="Digite sua senha" required>
+                </div>
+
+                <div class="checkbox-group" style="margin: 20px 0;">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember" style="font-weight: normal;">
+                        Lembrar-me neste dispositivo
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-submit" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> Entrar
+                </button>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="index.html" style="color: var(--accent-color); text-decoration: none;">
+                        <i class="fas fa-arrow-left"></i> Voltar para início
+                    </a>
+                </div>
+            </form>
+
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee; text-align: center; font-size: 0.85rem; color: #666;">
+                <p><strong>Primeira vez?</strong> Veja as instruções no arquivo GUIA-FIREBASE.txt</p>
+                <p style="margin-top: 10px;">
+                    <i class="fas fa-question-circle"></i> 
+                    O primeiro usuário (admin) deve ser criado no console do Firebase
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    
+    <script>
+        // Inicializar Firebase
+        const firebaseInitialized = initFirebase();
+
+        // Verificar se já está logado
+        onAuthStateChanged(user => {
+            if (user) {
+                console.log('Usuário já logado:', user.email);
+                window.location.href = 'visualizar.html';
+            }
+        });
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+
+            // Mostrar loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('errorMessage').style.display = 'none';
+            document.querySelector('.btn-submit').disabled = true;
+
+            if (!firebaseInitialized) {
+                showError('Firebase não configurado. Veja o arquivo GUIA-FIREBASE.txt');
+                return;
+            }
+
+            // Tentar login
+            const result = await loginAdmin(email, password);
+
+            if (result.success) {
+                // Salvar preferência de lembrar
+                if (remember) {
+                    localStorage.setItem('rememberMe', 'true');
+                }
+
+                // Redirecionar
+                window.location.href = 'visualizar.html';
+            } else {
+                showError(getErrorMessage(result.error));
+            }
+        });
+
+        function showError(message) {
+            document.getElementById('loading').style.display = 'none';
+            document.querySelector('.btn-submit').disabled = false;
+            document.getElementById('errorText').textContent = message;
+            document.getElementById('errorMessage').style.display = 'block';
+        }
+
+        function getErrorMessage(error) {
+            const messages = {
+                'auth/user-not-found': 'Usuário não encontrado',
+                'auth/wrong-password': 'Senha incorreta',
+                'auth/invalid-email': 'E-mail inválido',
+                'auth/user-disabled': 'Usuário desabilitado',
+                'auth/too-many-requests': 'Muitas tentativas. Tente novamente mais tarde',
+                'auth/network-request-failed': 'Erro de conexão. Verifique sua internet'
+            };
+
+            return messages[error] || 'Erro ao fazer login: ' + error;
+        }
+    </script>
+</body>
+</html>

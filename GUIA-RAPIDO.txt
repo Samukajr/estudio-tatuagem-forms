@@ -1,0 +1,221 @@
+╔═══════════════════════════════════════════════════════════════╗
+║  🎨 SISTEMA DE FORMULÁRIOS - ESTÚDIO DE TATUAGEM & PIERCING  ║
+║                      GUIA DE INÍCIO RÁPIDO                    ║
+╚═══════════════════════════════════════════════════════════════╝
+
+📁 ARQUIVOS CRIADOS:
+--------------------
+✓ index.html           - Página inicial (comece por aqui!)
+✓ agendamento.html     - Formulário de agendamento e briefing
+✓ anamnese.html        - Formulário de histórico de saúde
+✓ consentimento.html   - Termo de consentimento informado
+✓ uso-imagem.html      - Autorização de uso de imagem
+✓ visualizar.html      - Painel administrativo
+✓ styles.css           - Estilos visuais
+✓ script.js            - Funcionalidades JavaScript
+✓ README.md            - Documentação completa
+
+🚀 PRIMEIROS PASSOS:
+--------------------
+
+1️⃣ ABRA O SISTEMA:
+   → Clique duas vezes no arquivo "index.html"
+   → Ou arraste-o para o navegador (Chrome, Firefox, Edge)
+   → O sistema abrirá automaticamente
+
+2️⃣ TESTE OS FORMULÁRIOS:
+   → Clique em cada card para testar os formulários
+   → Preencha os dados de teste
+   → Assine digitalmente com o mouse ou dedo (touch)
+   → Clique em "Enviar" para salvar
+
+3️⃣ VISUALIZE OS DADOS:
+   → Na página inicial, clique em "Área Administrativa"
+   → Ou abra diretamente "visualizar.html"
+   → Veja estatísticas e todos os formulários submetidos
+
+⚙️ PERSONALIZE SEU ESTÚDIO:
+---------------------------
+
+📝 Dados do Estúdio (OBRIGATÓRIO):
+   Arquivo: consentimento.html (linhas ~60-65)
+   Substituir:
+   - [NOME DO ESTÚDIO] → Nome do seu estúdio
+   - [CNPJ] → Seu CNPJ
+   - [ENDEREÇO] → Endereço completo
+
+   Arquivo: uso-imagem.html (linha ~45)
+   Substituir:
+   - [NOME DO ESTÚDIO] → Nome do seu estúdio
+
+📱 Redes Sociais:
+   Arquivo: index.html (rodapé)
+   Adicionar seus links de:
+   - Instagram
+   - Facebook
+   - WhatsApp
+
+👨‍🎨 Artistas:
+   Arquivo: agendamento.html (linha ~180)
+   Adicionar nome e especialidade dos artistas
+
+🎨 Cores da Marca:
+   Arquivo: styles.css (linhas 1-15)
+   Alterar as variáveis de cor
+
+✨ RECURSOS PRINCIPAIS:
+-----------------------
+
+✓ 4 Formulários Profissionais Completos
+✓ Assinatura Digital (mouse + touch)
+✓ Validação de CPF, E-mail, Idade
+✓ Design Responsivo (mobile, tablet, desktop)
+✓ Armazenamento Local Seguro
+✓ Geração de Protocolo Único
+✓ Impressão/PDF dos Formulários
+✓ Painel Administrativo
+✓ Conformidade LGPD + ANVISA
+✓ Sem necessidade de servidor
+
+🔒 SEGURANÇA:
+-------------
+
+✓ Validações de segurança automáticas:
+  - Menores de 18 anos = necessário responsável
+  - Grávidas = bloqueio com aviso
+  - Álcool nas últimas 24h = bloqueio
+  - CPF inválido = não permite envio
+
+✓ Dados armazenados localmente (navegador)
+✓ Conformidade com LGPD
+✓ Termos legais completos
+
+📊 COMO FUNCIONA:
+-----------------
+
+CLIENTE:
+1. Acessa o sistema (tablet na recepção ou link via WhatsApp)
+2. Escolhe o formulário apropriado
+3. Preenche os dados solicitados
+4. Assina digitalmente
+5. Recebe número de protocolo
+
+ESTÚDIO:
+1. Cliente preenche formulários antes da sessão
+2. Administração acessa "visualizar.html"
+3. Vê estatísticas e todos os formulários
+4. Pode imprimir/exportar/excluir
+5. Dados organizados e seguros
+
+💡 DICAS DE USO:
+----------------
+
+📱 Para Clientes:
+   → Use tablet na recepção para melhor experiência
+   → Compartilhe link via WhatsApp para pré-cadastro
+   → Garanta que o JavaScript esteja ativado
+
+💾 Backup:
+   → Clique em "Exportar Dados" regularmente
+   → Salve o arquivo JSON em local seguro
+   → Faça backup semanal
+
+🖨️ Impressão:
+   → Use "Salvar como PDF" em vez de imprimir
+   → Configure margens mínimas
+   → Orientação: Retrato
+
+📧 Suporte:
+   → Leia o README.md para mais detalhes
+   → Todos os recursos estão documentados
+   → Problemas comuns e soluções incluídos
+
+⚡ ATALHOS RÁPIDOS:
+------------------
+
+🏠 Página Inicial → index.html
+📅 Agendamento → agendamento.html
+❤️ Anamnese → anamnese.html
+📝 Consentimento → consentimento.html
+📸 Uso de Imagem → uso-imagem.html
+📊 Admin → visualizar.html
+
+🎯 PRÓXIMOS PASSOS:
+-------------------
+
+☐ Personalizar dados do estúdio
+☐ Adicionar logo/marca
+☐ Configurar redes sociais
+☐ Testar em diferentes dispositivos
+☐ Treinar equipe
+☐ Fazer backup inicial
+☐ Compartilhar link com clientes
+
+📞 PROBLEMAS COMUNS:
+--------------------
+
+❌ Assinatura não funciona:
+   → Ative JavaScript
+   → Teste em modo não-anônimo
+   → Limpe cache do navegador
+
+❌ Dados não salvam:
+   → Não use modo anônimo
+   → Ative localStorage
+   → Verifique permissões do navegador
+
+❌ Não imprime:
+   → Use "Salvar como PDF"
+   → Verifique configurações de impressão
+   → Tente outro navegador
+
+💻 REQUISITOS TÉCNICOS:
+-----------------------
+
+Navegador: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+JavaScript: Habilitado
+LocalStorage: Ativado
+Conexão: Necessária apenas para ícones (Font Awesome)
+Offline: Funciona após primeiro carregamento
+
+🌟 BENEFÍCIOS:
+--------------
+
+✓ Profissionalismo e credibilidade
+✓ Segurança jurídica completa
+✓ Processo digital moderno
+✓ Economia de papel
+✓ Dados organizados
+✓ Conformidade legal
+✓ Melhor experiência do cliente
+✓ Facilita marketing (autorização de imagem)
+
+📱 COMO USAR NO DIA A DIA:
+--------------------------
+
+OPÇÃO 1 - Tablet na Recepção:
+   Cliente chega → Entrega tablet → Preenche formulários
+   
+OPÇÃO 2 - Envio Antecipado:
+   Agendamento confirmado → Envia link via WhatsApp
+   → Cliente preenche em casa antes da sessão
+
+OPÇÃO 3 - Computador:
+   Cliente usa computador do estúdio enquanto aguarda
+
+═══════════════════════════════════════════════════════════════
+
+🎨 BOM TRABALHO E SUCESSO NO SEU ESTÚDIO! 🎨
+
+Desenvolvido com ❤️ para a comunidade de tatuadores
+Versão 1.0.0 - Fevereiro 2026
+
+═══════════════════════════════════════════════════════════════
+
+LEMBRE-SE:
+→ Este sistema não substitui orientação jurídica profissional
+→ Consulte um advogado para adequação aos seus processos
+→ Mantenha backups regulares dos dados
+→ Respeite a LGPD e privacidade dos clientes
+
+═══════════════════════════════════════════════════════════════

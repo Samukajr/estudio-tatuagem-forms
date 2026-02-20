@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Formulários - Estúdio de Tatuagem</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-dragon"></i>
+                <h1>Estúdio de Tatuagem & Piercing</h1>
+            </div>
+            <p class="subtitle">Sistema de Formulários Digital</p>
+        </header>
+
+        <main class="main-content">
+            <div class="welcome-section">
+                <h2>Bem-vindo ao nosso sistema de atendimento</h2>
+                <p>Por favor, selecione o formulário que deseja preencher:</p>
+            </div>
+
+            <div class="forms-grid">
+                <div class="form-card" onclick="openForm('agendamento')">
+                    <div class="card-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Agendamento & Briefing</h3>
+                    <p>Agende sua sessão e nos conte sobre seu projeto</p>
+                    <button class="btn btn-primary">Iniciar <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="form-card" onclick="openForm('anamnese')">
+                    <div class="card-icon health">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Anamnese (Histórico de Saúde)</h3>
+                    <p>Informações importantes para sua segurança</p>
+                    <button class="btn btn-secondary">Preencher <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="form-card" onclick="openForm('consentimento')">
+                    <div class="card-icon legal">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <h3>Termo de Consentimento</h3>
+                    <p>Leia e assine o termo de responsabilidade</p>
+                    <button class="btn btn-tertiary">Assinar <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="form-card" onclick="openForm('imagem')">
+                    <div class="card-icon image">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Autorização de Uso de Imagem</h3>
+                    <p>Autorizando divulgação nas redes sociais</p>
+                    <button class="btn btn-quaternary">Autorizar <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Segurança e Privacidade</h4>
+                    <p>Seus dados são protegidos e usados apenas para fins do atendimento.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-clock"></i>
+                    <h4>Processo Rápido</h4>
+                    <p>Preencha os formulários em poucos minutos antes da sua sessão.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>Conformidade Legal</h4>
+                    <p>Todos os documentos seguem as normas da ANVISA e LGPD.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px solid #eee;">
+                <a href="visualizar.html" style="display: inline-block; padding: 15px 30px; background: var(--gradient-1); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; transition: all 0.3s ease;">
+                    <i class="fas fa-folder-open"></i> Área Administrativa - Visualizar Formulários
+                </a>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Estúdio de Tatuagem & Piercing. Todos os direitos reservados.</p>
+            <p class="footer-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
