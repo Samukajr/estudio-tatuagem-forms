@@ -247,6 +247,27 @@ body {
     color: #666;
 }
 
+.copyright-footer {
+    background: rgba(26, 26, 46, 0.95) !important;
+    color: white !important;
+    text-align: center;
+    padding: 25px !important;
+    border-top: 3px solid var(--accent-color);
+    font-size: 0.9rem !important;
+    margin-top: 40px !important;
+    border-radius: 0 !important;
+}
+
+.copyright-footer p {
+    margin: 5px 0 !important;
+    color: white !important;
+}
+
+.copyright-footer strong {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
 .footer-links {
     margin-top: 15px;
     display: flex;
