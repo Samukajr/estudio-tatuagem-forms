@@ -72,46 +72,65 @@ async function saveToFirestore(formName, data) {
 async function loadFromFirestore(filters = {}) {
     try {
         if (!db) {
+            console.warn('⚠️ Firebase DB não inicializado');
             throw new Error('Firebase não inicializado');
         }
 
         let query = db.collection('formularios');
+        let hasFilters = false;
 
         // Aplicar filtros
         if (filters.formType) {
             query = query.where('formType', '==', filters.formType);
+            hasFilters = true;
+            console.log(`🔍 Filtro: formType = ${filters.formType}`);
         }
 
         if (filters.startDate) {
             query = query.where('createdAt', '>=', filters.startDate);
+            hasFilters = true;
+            console.log(`🔍 Filtro: startDate >= ${filters.startDate}`);
         }
 
         if (filters.endDate) {
             query = query.where('createdAt', '<=', filters.endDate);
+            hasFilters = true;
+            console.log(`🔍 Filtro: endDate <= ${filters.endDate}`);
         }
 
-        // Ordenar por data mais recente
-        query = query.orderBy('createdAt', 'desc');
+        // Ordenar por data mais recente (sem orderBy inicial para evitar índices)
+        if (!hasFilters) {
+            query = query.orderBy('timestamp', 'desc');
+            console.log('📊 Carregando SEM filtros, ordenado por timestamp');
+        }
 
         // Limitar resultados
         if (filters.limit) {
             query = query.limit(filters.limit);
+            console.log(`🔢 Limitado a ${filters.limit} resultados`);
         }
 
+        console.log('🔄 Executando query do Firestore...');
         const snapshot = await query.get();
+        console.log(`📦 Query retornou ${snapshot.size} documentos`);
+        
         const formularios = [];
 
         snapshot.forEach(doc => {
+            const data = doc.data();
             formularios.push({
                 id: doc.id,
-                ...doc.data()
+                formId: doc.id,
+                ...data
             });
+            console.log(`✅ Documento carregado: ${doc.id}`, data);
         });
 
-        console.log(`✅ ${formularios.length} formulários carregados do Firestore`);
+        console.log(`✅ Total: ${formularios.length} formulários carregados do Firestore`);
         return formularios;
     } catch (error) {
-        console.error('❌ Erro ao carregar do Firestore:', error);
+        console.error('❌ Erro ao carregar do Firestore:', error.message);
+        console.error('📋 Stack:', error);
         return [];
     }
 }

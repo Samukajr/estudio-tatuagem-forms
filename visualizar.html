@@ -499,146 +499,193 @@
             exibirFormularios(filtered);
         }
 
-        // Ver detalhes
+        // Ver detalhes - Mostra TODOS os dados preenchidos
         function verDetalhes(index) {
             const form = todosFormularios[index];
-            const modal = window.open('', 'Detalhes', 'width=1000,height=800,scrollbars=yes');
+            const modal = window.open('', 'Detalhes', 'width=1200,height=900,scrollbars=yes');
             
-            // Compilar HTML simples
-            let html = '<html><head><meta charset="UTF-8"><title>Ficha - ' + form.nome + '</title>';
+            if (!form) {
+                alert('Erro: Formulário não encontrado');
+                return;
+            }
+
+            // Compilar HTML com TODOS os dados
+            let html = '<html><head><meta charset="UTF-8"><title>Ficha Completa - ' + (form.nome || 'Formulário') + '</title>';
             html += '<style>';
             html += '* { margin: 0; padding: 0; box-sizing: border-box; }';
             html += 'body { font-family: "Segoe UI", Arial, sans-serif; background: #f5f5f5; padding: 20px; color: #333; }';
-            html += '.container { max-width: 900px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); overflow: hidden; }';
+            html += '.container { max-width: 1100px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); overflow: hidden; }';
             html += '.header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 30px; text-align: center; border-bottom: 3px solid #e94560; }';
             html += '.header h1 { font-size: 2rem; margin-bottom: 10px; }';
             html += '.header p { font-size: 0.9rem; opacity: 0.9; }';
             html += '.content { padding: 30px; }';
-            html += '.section { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #eee; }';
-            html += '.section:last-child { border-bottom: none; }';
-            html += '.section-title { color: #1e3c72; font-size: 1.2rem; font-weight: 600; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #e94560; }';
-            html += '.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 15px; }';
-            html += '.field-row.full { grid-template-columns: 1fr; }';
-            html += '.field { display: flex; flex-direction: column; }';
-            html += '.field-label { font-weight: 600; color: #1e3c72; font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }';
-            html += '.field-value { color: #555; font-size: 1rem; padding: 10px; background: #f9f9f9; border-left: 3px solid #e94560; border-radius: 4px; }';
-            html += '.checkbox-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }';
-            html += '.checkbox-item { background: #e94560; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; }';
-            html += '.data-info { text-align: center; font-size: 0.85rem; color: #999; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; }';
+            html += '.section { margin-bottom: 30px; padding: 20px; background: #f9f9f9; border-left: 4px solid #e94560; border-radius: 8px; }';
+            html += '.section-title { color: #1e3c72; font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }';
+            html += '.field { margin-bottom: 15px; padding: 10px; background: white; border-radius: 6px; }';
+            html += '.field-label { font-weight: 600; color: #1e3c72; font-size: 0.85rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }';
+            html += '.field-value { color: #555; font-size: 1rem; padding: 10px; background: #f5f5f5; border-left: 3px solid #e94560; border-radius: 4px; word-break: break-word; }';
+            html += '.field-value.empty { color: #999; font-style: italic; }';
+            html += '.array-item { background: #e94560; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; display: inline-block; margin: 3px; }';
+            html += '.object-value { background: #f0f0f0; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 0.9rem; }';
+            html += '.data-info { text-align: center; font-size: 0.85rem; color: #999; margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee; }';
             html += '.print-btn { display: block; margin: 20px auto; padding: 12px 30px; background: #e94560; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; }';
             html += '.print-btn:hover { background: #c73550; }';
+            html += '.raw-data { background: #f5f5f5; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; overflow-x: auto; border-left: 4px solid #666; margin-top: 20px; }';
             html += '@media print { body { background: white; padding: 0; } .container { box-shadow: none; } .print-btn { display: none; } }';
             html += '</style></head><body>';
             html += '<div class="container">';
-            html += '<div class="header"><h1>' + (form.nome || 'Formulário') + '</h1>';
-            html += '<p>Ficha de ' + (form.formType ? form.formType.replace('-', ' ').toUpperCase() : 'FORMULÁRIO') + '</p></div>';
+            html += '<div class="header"><h1>Ficha Completa do Cliente</h1>';
+            html += '<p>Tipo: ' + (form.formType ? form.formType.replace('-', ' ').toUpperCase() : 'DESCONHECIDO') + '</p></div>';
             html += '<div class="content">';
 
-            // Dados Pessoais
-            if (form.nome || form.cpf || form.email || form.telefone) {
-                html += '<div class="section"><div class="section-title">👤 Dados Pessoais</div>';
-                html += '<div class="field-row">';
-                html += '<div class="field"><div class="field-label">Nome Completo</div><div class="field-value">' + (form.nome || '-') + '</div></div>';
-                html += '<div class="field"><div class="field-label">CPF</div><div class="field-value">' + (form.cpf || '-') + '</div></div>';
-                html += '</div>';
-                html += '<div class="field-row">';
-                html += '<div class="field"><div class="field-label">E-mail</div><div class="field-value">' + (form.email || '-') + '</div></div>';
-                html += '<div class="field"><div class="field-label">Telefone/WhatsApp</div><div class="field-value">' + (form.telefone || '-') + '</div></div>';
-                html += '</div>';
-                if (form.dataNascimento) {
-                    html += '<div class="field-row">';
-                    html += '<div class="field"><div class="field-label">Data de Nascimento</div><div class="field-value">' + new Date(form.dataNascimento).toLocaleDateString('pt-BR') + '</div></div>';
-                    html += '<div class="field"><div class="field-label">Idade</div><div class="field-value">' + (form.idade || '-') + ' anos</div></div>';
-                    html += '</div>';
-                }
-                html += '</div>';
-            }
+            // Seção 1: Informações Básicas
+            html += '<div class="section">';
+            html += '<div class="section-title">📋 Informações Básicas do Formulário</div>';
+            html += '<div class="field"><div class="field-label">ID do Formulário</div><div class="field-value">' + (form.formId || form.id || 'N/A') + '</div></div>';
+            html += '<div class="field"><div class="field-label">Tipo</div><div class="field-value">' + (form.formType || 'N/A') + '</div></div>';
+            html += '<div class="field"><div class="field-label">Data de Preenchimento</div><div class="field-value">' + (form.timestamp ? new Date(form.timestamp).toLocaleString('pt-BR') : (form.createdAt ? new Date(form.createdAt).toLocaleString('pt-BR') : 'N/A')) + '</div></div>';
+            html += '<div class="field"><div class="field-label">Status</div><div class="field-value">' + (form.status || 'novo') + '</div></div>';
+            html += '</div>';
 
-            // Conteúdo específico
+            // Seção 2: Dados Pessoais
+            html += '<div class="section">';
+            html += '<div class="section-title">👤 Dados Pessoais do Cliente</div>';
+            html += '<div class="field"><div class="field-label">Nome Completo</div><div class="field-value ' + (form.nome ? '' : 'empty') + '">' + (form.nome || 'Não informado') + '</div></div>';
+            html += '<div class="field"><div class="field-label">CPF</div><div class="field-value ' + (form.cpf ? '' : 'empty') + '">' + (form.cpf || 'Não informado') + '</div></div>';
+            html += '<div class="field"><div class="field-label">E-mail</div><div class="field-value ' + (form.email ? '' : 'empty') + '">' + (form.email || 'Não informado') + '</div></div>';
+            html += '<div class="field"><div class="field-label">Telefone/WhatsApp</div><div class="field-value ' + (form.telefone ? '' : 'empty') + '">' + (form.telefone || 'Não informado') + '</div></div>';
+            html += '<div class="field"><div class="field-label">Data de Nascimento</div><div class="field-value ' + (form.dataNascimento ? '' : 'empty') + '">' + (form.dataNascimento ? new Date(form.dataNascimento).toLocaleDateString('pt-BR') : 'Não informado') + '</div></div>';
+            html += '<div class="field"><div class="field-label">Idade</div><div class="field-value ' + (form.idade ? '' : 'empty') + '">' + (form.idade || 'Não informado') + '</div></div>';
+            html += '</div>';
+
+            // Seção 3: Dados Específicos por Tipo
             if (form.formType === 'agendamento') {
-                html += '<div class="section"><div class="section-title">🎨 Informações do Projeto</div>';
-                if (form.tipoServico) html += '<div class="field-row"><div class="field"><div class="field-label">Tipo de Serviço</div><div class="field-value">' + form.tipoServico + '</div></div></div>';
-                if (form.localTatuagem) {
-                    html += '<div class="field-row">';
-                    html += '<div class="field"><div class="field-label">Local do Corpo</div><div class="field-value">' + form.localTatuagem + '</div></div>';
-                    html += '<div class="field"><div class="field-label">Tamanho</div><div class="field-value">' + (form.tamanho || '-') + '</div></div>';
-                    html += '</div>';
-                }
-                if (form.estilo) html += '<div class="field-row"><div class="field"><div class="field-label">Estilo</div><div class="field-value">' + form.estilo + '</div></div></div>';
-                if (form.descricao) html += '<div class="field-row full"><div class="field"><div class="field-label">Descrição do Projeto</div><div class="field-value">' + form.descricao + '</div></div></div>';
+                html += '<div class="section">';
+                html += '<div class="section-title">🎨 Informações do Projeto Tatuagem</div>';
+                html += '<div class="field"><div class="field-label">Tipo de Serviço</div><div class="field-value ' + (form.tipoServico ? '' : 'empty') + '">' + (form.tipoServico || 'Não informado') + '</div></div>';
+                html += '<div class="field"><div class="field-label">Local do Corpo</div><div class="field-value ' + (form.localTatuagem ? '' : 'empty') + '">' + (form.localTatuagem || 'Não informado') + '</div></div>';
+                html += '<div class="field"><div class="field-label">Tamanho Estimado</div><div class="field-value ' + (form.tamanho ? '' : 'empty') + '">' + (form.tamanho || 'Não informado') + '</div></div>';
+                html += '<div class="field"><div class="field-label">Estilo de Tatuagem</div><div class="field-value ' + (form.estilo ? '' : 'empty') + '">' + (form.estilo || 'Não informado') + '</div></div>';
+                html += '<div class="field"><div class="field-label">Descrição do Projeto</div><div class="field-value ' + (form.descricao ? '' : 'empty') + '" style="white-space: pre-wrap;">' + (form.descricao || 'Não informado') + '</div></div>';
                 html += '</div>';
 
-                html += '<div class="section"><div class="section-title">📅 Preferências de Agendamento</div>';
-                if (form.dataPreferida) {
-                    html += '<div class="field-row">';
-                    html += '<div class="field"><div class="field-label">Data Preferida</div><div class="field-value">' + new Date(form.dataPreferida).toLocaleDateString('pt-BR') + '</div></div>';
-                    html += '<div class="field"><div class="field-label">Horário</div><div class="field-value">' + (form.horarioPreferido || '-') + '</div></div>';
-                    html += '</div>';
-                }
-                if (form.tatuadorPreferido || form.orcamento) {
-                    html += '<div class="field-row">';
-                    html += '<div class="field"><div class="field-label">Tatuador Preferido</div><div class="field-value">' + (form.tatuadorPreferido || '-') + '</div></div>';
-                    html += '<div class="field"><div class="field-label">Orçamento</div><div class="field-value">' + (form.orcamento || '-') + '</div></div>';
-                    html += '</div>';
-                }
+                html += '<div class="section">';
+                html += '<div class="section-title">📅 Preferências de Agendamento</div>';
+                html += '<div class="field"><div class="field-label">Data Preferida</div><div class="field-value ' + (form.dataPreferida ? '' : 'empty') + '">' + (form.dataPreferida ? new Date(form.dataPreferida).toLocaleDateString('pt-BR') : 'Não informado') + '</div></div>';
+                html += '<div class="field"><div class="field-label">Horário Preferido</div><div class="field-value ' + (form.horarioPreferido ? '' : 'empty') + '">' + (form.horarioPreferido || 'Não informado') + '</div></div>';
+                html += '<div class="field"><div class="field-label">Tatuador Preferido</div><div class="field-value ' + (form.tatuadorPreferido ? '' : 'empty') + '">' + (form.tatuadorPreferido || 'Não informado') + '</div></div>';
+                html += '<div class="field"><div class="field-label">Orçamento</div><div class="field-value ' + (form.orcamento ? '' : 'empty') + '">' + (form.orcamento || 'Não informado') + '</div></div>';
                 html += '</div>';
             }
 
             if (form.formType === 'anamnese') {
-                html += '<div class="section"><div class="section-title">🏥 Condições de Saúde</div>';
+                html += '<div class="section">';
+                html += '<div class="section-title">🏥 Condições de Saúde</div>';
                 if (form.condicoes && form.condicoes.length > 0) {
-                    html += '<div class="field-label">Condições Reportadas:</div><div class="checkbox-list">';
-                    form.condicoes.forEach(c => html += '<span class="checkbox-item">' + c + '</span>');
+                    html += '<div class="field"><div class="field-label">Condições Reportadas:</div>';
+                    form.condicoes.forEach(c => html += '<span class="array-item">' + c + '</span>');
                     html += '</div>';
                 } else {
-                    html += '<div class="field-value">Nenhuma condição reportada</div>';
+                    html += '<div class="field"><div class="field-value empty">Nenhuma condição reportada</div></div>';
                 }
+                html += '<div class="field"><div class="field-label">Medicações Contínuas</div><div class="field-value ' + (form.medicacoes ? '' : 'empty') + '" style="white-space: pre-wrap;">' + (form.medicacoes || 'Não informado') + '</div></div>';
                 html += '</div>';
 
-                html += '<div class="section"><div class="section-title">💊 Medicações e Alergias</div>';
+                html += '<div class="section">';
+                html += '<div class="section-title">💊 Alergias e Reações</div>';
                 if (form.alergias && form.alergias.length > 0) {
-                    html += '<div class="field-label">Alergias:</div><div class="checkbox-list">';
-                    form.alergias.forEach(a => html += '<span class="checkbox-item">' + a + '</span>');
+                    html += '<div class="field"><div class="field-label">Alergias Reportadas:</div>';
+                    form.alergias.forEach(a => html += '<span class="array-item">' + a + '</span>');
                     html += '</div>';
                 } else {
-                    html += '<div class="field-value">Sem alergias reportadas</div>';
+                    html += '<div class="field"><div class="field-value empty">Sem alergias reportadas</div></div>';
                 }
+                html += '<div class="field"><div class="field-label">Reações Alérgicas Anteriores</div><div class="field-value ' + (form.reacoesAlergicas ? '' : 'empty') + '" style="white-space: pre-wrap;">' + (form.reacoesAlergicas || 'Não informado') + '</div></div>';
                 html += '</div>';
 
-                html += '<div class="section"><div class="section-title">❓ Questões Específicas</div>';
-                if (form.gravidez === 'sim') html += '<div class="field-value">⚠️ <strong>Cliente grávida</strong></div>';
-                if (form.alcool === 'sim') html += '<div class="field-value">⚠️ <strong>Consumiu álcool nas últimas 24h</strong></div>';
-                if (form.doacao === 'sim') html += '<div class="field-value">ℹ️ Doação de sangue nos últimos 12 meses</div>';
+                html += '<div class="section">';
+                html += '<div class="section-title">❓ Questões Médicas Específicas</div>';
+                html += '<div class="field"><div class="field-label">Está Grávida?</div><div class="field-value ' + (form.gravidez ? '' : 'empty') + '">' + (form.gravidez || 'Não informado') + '</div></div>';
+                html += '<div class="field"><div class="field-label">Consumiu Álcool nas Últimas 24h?</div><div class="field-value ' + (form.alcool ? '' : 'empty') + '">' + (form.alcool || 'Não informado') + '</div></div>';
+                html += '<div class="field"><div class="field-label">Doação de Sangue nos Últimos 12 Meses?</div><div class="field-value ' + (form.doacao ? '' : 'empty') + '">' + (form.doacao || 'Não informado') + '</div></div>';
+                html += '<div class="field"><div class="field-label">Problemas de Cicatrização?</div><div class="field-value ' + (form.cicatrizacao ? '' : 'empty') + '">' + (form.cicatrizacao || 'Não informado') + '</div></div>';
+                html += '<div class="field"><div class="field-label">Problemas de Coagulação?</div><div class="field-value ' + (form.coagulacao ? '' : 'empty') + '">' + (form.coagulacao || 'Não informado') + '</div></div>';
                 html += '</div>';
             }
 
             if (form.formType === 'consentimento') {
-                html += '<div class="section"><div class="section-title">✅ Status do Consentimento</div>';
-                html += '<div class="field-value">' + (form.assinatura ? '✓ Assinado digitalmente' : '❌ Não assinado') + '</div>';
+                html += '<div class="section">';
+                html += '<div class="section-title">✅ Termo de Consentimento</div>';
+                html += '<div class="field"><div class="field-label">Consentimento Fornecido?</div><div class="field-value">' + (form.assinatura ? '✓ SIM - Assinado digitalmente' : '❌ NÃO ASSINADO') + '</div></div>';
+                html += '<div class="field"><div class="field-label">Data da Assinatura</div><div class="field-value ' + (form.dataAssinatura ? '' : 'empty') + '">' + (form.dataAssinatura ? new Date(form.dataAssinatura).toLocaleString('pt-BR') : 'Não assinado') + '</div></div>';
                 html += '</div>';
             }
 
             if (form.formType === 'uso-imagem') {
-                html += '<div class="section"><div class="section-title">📸 Autorização de Uso de Imagem</div>';
-                if (form.preferencias && form.preferencias.redes) {
-                    html += '<div class="field-label">Redes Sociais Autorizadas:</div><div class="checkbox-list">';
-                    Object.entries(form.preferencias.redes).forEach(([rede, autorizado]) => {
-                        if (autorizado) html += '<span class="checkbox-item">' + rede + '</span>';
-                    });
-                    html += '</div>';
-                }
-                if (form.preferencias && form.preferencias.visibilidade) {
-                    html += '<div class="field-row" style="margin-top: 15px;">';
-                    html += '<div class="field"><div class="field-label">Visibilidade do Rosto</div><div class="field-value">' + form.preferencias.visibilidade + '</div></div>';
-                    html += '<div class="field"><div class="field-label">Identificação</div><div class="field-value">' + (form.preferencias.identificacao || '-') + '</div></div>';
-                    html += '</div>';
+                html += '<div class="section">';
+                html += '<div class="section-title">📸 Autorização de Uso de Imagem</div>';
+                if (form.preferencias) {
+                    if (form.preferencias.redes) {
+                        html += '<div class="field"><div class="field-label">Redes Sociais Autorizadas:</div>';
+                        let temAutorizacao = false;
+                        Object.entries(form.preferencias.redes).forEach(([rede, autorizado]) => {
+                            if (autorizado) {
+                                html += '<span class="array-item">' + rede + '</span>';
+                                temAutorizacao = true;
+                            }
+                        });
+                        if (!temAutorizacao) {
+                            html += '<div class="field-value empty">Nenhuma rede autorizada</div>';
+                        }
+                        html += '</div>';
+                    }
+                    html += '<div class="field"><div class="field-label">Visibilidade do Rosto</div><div class="field-value ' + (form.preferencias.visibilidade ? '' : 'empty') + '">' + (form.preferencias.visibilidade || 'Não informado') + '</div></div>';
+                    html += '<div class="field"><div class="field-label">Autorização de Identificação</div><div class="field-value ' + (form.preferencias.identificacao ? '' : 'empty') + '">' + (form.preferencias.identificacao || 'Não informado') + '</div></div>';
                 }
                 html += '</div>';
             }
 
-            html += '<div class="data-info"><strong>ID:</strong> ' + form.formId + '<br>';
-            html += '<strong>Preenchido em:</strong> ' + new Date(form.timestamp).toLocaleString('pt-BR') + '</div>';
-            html += '<button class="print-btn" onclick="window.print()">🖨️ Imprimir Ficha</button>';
+            // Seção: Todos os Outros Campos (catch-all para qualquer campo não mapeado)
+            html += '<div class="section">';
+            html += '<div class="section-title">📝 Todos os Dados Adicionais</div>';
+            const camposIgnorados = ['nome', 'cpf', 'email', 'telefone', 'dataNascimento', 'idade', 'tipoServico', 'localTatuagem', 'tamanho', 'estilo', 'descricao', 'dataPreferida', 'horarioPreferido', 'tatuadorPreferido', 'orcamento', 'condicoes', 'medicacoes', 'alergias', 'reacoesAlergicas', 'gravidez', 'alcool', 'doacao', 'cicatrizacao', 'coagulacao', 'assinatura', 'dataAssinatura', 'preferencias', 'formType', 'timestamp', 'createdAt', 'formId', 'id', 'status', 'updatedAt', 'firebaseId'];
+            let temOutrosCampos = false;
+            
+            for (const [chave, valor] of Object.entries(form)) {
+                if (!camposIgnorados.includes(chave) && valor !== null && valor !== undefined && valor !== '') {
+                    temOutrosCampos = true;
+                    html += '<div class="field">';
+                    html += '<div class="field-label">' + chave.replace(/([A-Z])/g, ' $1').trim() + '</div>';
+                    
+                    if (typeof valor === 'object') {
+                        html += '<div class="object-value">' + JSON.stringify(valor, null, 2).replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>';
+                    } else if (Array.isArray(valor)) {
+                        html += '<div>';
+                        valor.forEach(item => {
+                            html += '<span class="array-item">' + item + '</span>';
+                        });
+                        html += '</div>';
+                    } else {
+                        html += '<div class="field-value" style="white-space: pre-wrap;">' + (valor ? valor.toString() : 'Vazio') + '</div>';
+                    }
+                    html += '</div>';
+                }
+            }
+            
+            if (!temOutrosCampos) {
+                html += '<div class="field-value empty">Nenhum campo adicional</div>';
+            }
+            html += '</div>';
+
+            // Seção: JSON Bruto (para referência técnica)
+            html += '<div class="section">';
+            html += '<div class="section-title">🔧 Dados Brutos em JSON</div>';
+            html += '<div class="raw-data">' + JSON.stringify(form, null, 2).replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>';
+            html += '</div>';
+
+            html += '<div class="data-info"><strong>ID:</strong> ' + (form.formId || form.id || 'N/A') + '<br>';
+            html += '<strong>Preenchido em:</strong> ' + (form.timestamp ? new Date(form.timestamp).toLocaleString('pt-BR') : (form.createdAt ? new Date(form.createdAt).toLocaleString('pt-BR') : 'Desconhecido')) + '</div>';
+            html += '<button class="print-btn" onclick="window.print()">🖨️ Imprimir Ficha Completa</button>';
             html += '</div></div></body></html>';
 
             modal.document.write(html);
