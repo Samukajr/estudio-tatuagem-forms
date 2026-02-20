@@ -335,15 +335,25 @@ body {
 }
 
 .checkbox-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    align-items: start;
+    column-gap: 10px;
+    row-gap: 6px;
+    margin-bottom: 12px;
 }
 
-.checkbox-group input[type="checkbox"] {
+.checkbox-group input[type="checkbox"],
+.checkbox-group input[type="radio"] {
     width: auto;
     cursor: pointer;
+    margin-top: 3px;
+}
+
+.checkbox-group label {
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.4;
 }
 
 .required {
