@@ -588,6 +588,43 @@
             }
         }
 
+        // Exportar dados
+        function exportarDados() {
+            if (todosFormularios.length === 0) {
+                alert('Nenhum formulário para exportar!');
+                return;
+            }
+
+            // Preparar dados para exportação
+            const dadosExportacao = {
+                dataExportacao: new Date().toLocaleString('pt-BR'),
+                totalFormularios: todosFormularios.length,
+                resumo: {
+                    agendamentos: todosFormularios.filter(f => f.formType === 'agendamento').length,
+                    anamneses: todosFormularios.filter(f => f.formType === 'anamnese').length,
+                    consentimentos: todosFormularios.filter(f => f.formType === 'consentimento').length,
+                    usuarioImagem: todosFormularios.filter(f => f.formType === 'uso-imagem').length
+                },
+                formularios: todosFormularios
+            };
+
+            // Converter para JSON
+            const jsonString = JSON.stringify(dadosExportacao, null, 2);
+
+            // Criar blob e download
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `formularios_backup_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            alert(`✅ ${todosFormularios.length} formulários exportados com sucesso!`);
+        }
+
         // Fazer logout
         async function fazerLogout() {
             if (confirm('Deseja sair da área administrativa?')) {
