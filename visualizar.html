@@ -437,11 +437,6 @@
                                     <i class="fas fa-clock"></i> ${dataFormatada}
                                 </div>
                             </div>
-                            <div style="text-align: right;">
-                                <div style="font-weight: bold; color: var(--primary-color);">
-                                    ID: ${form.formId}
-                                </div>
-                            </div>
                         </div>
 
                         <div class="form-item-body">
@@ -555,7 +550,6 @@
             html += '<div class="header">';
             html += '<h1>' + (form.nome || 'Cliente') + '</h1>';
             html += '<div class="subtitle">Formulário de ' + tipoNome + '</div>';
-            html += '<div class="subtitle" style="margin-top: 10px; font-size: 0.8rem;">ID: ' + (form.formId || form.id || 'N/A') + '</div>';
             html += '</div>';
             html += '<div class="content">';
 
