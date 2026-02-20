@@ -189,9 +189,141 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Modal de Timeout de Inatividade */
+        .timeout-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .timeout-modal-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 15% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.5s ease;
+        }
+
+        .timeout-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .timeout-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .timeout-message {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+
+        .timeout-countdown {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #ffd700;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeout-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .timeout-btn {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeout-btn-continue {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .timeout-btn-continue:hover {
+            background: #27ae60;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
+        }
+
+        .timeout-btn-logout {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .timeout-btn-logout:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
     </style>
 </head>
 <body>
+    <!-- Modal de Timeout de Inatividade -->
+    <div id="timeoutModal" class="timeout-modal">
+        <div class="timeout-modal-content">
+            <div class="timeout-icon">⏰</div>
+            <div class="timeout-title">Sessão Inativa</div>
+            <div class="timeout-message">
+                Por segurança, você será desconectado em:
+            </div>
+            <div class="timeout-countdown" id="timeoutCountdown">30</div>
+            <div class="timeout-actions">
+                <button class="timeout-btn timeout-btn-continue" onclick="resetarTimeout()">
+                    <i class="fas fa-check-circle"></i> Continuar Conectado
+                </button>
+                <button class="timeout-btn timeout-btn-logout" onclick="fazerLogout()">
+                    <i class="fas fa-sign-out-alt"></i> Sair Agora
+                </button>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <header class="header">
             <div class="logo" style="display: flex; align-items: center; gap: 20px;">
@@ -313,6 +445,124 @@
             return !isNaN(data.getTime()) ? data : null;
         }
 
+        // ⏰ Sistema de Timeout de Inatividade
+        let timeoutInatividade = null;
+        let timeoutAviso = null;
+        let intervalContagem = null;
+        let segundosRestantes = 30;
+        const TEMPO_INATIVIDADE = 10 * 60 * 1000; // 10 minutos em milissegundos
+        const TEMPO_AVISO = 30 * 1000; // 30 segundos em milissegundos
+
+        // Eventos que indicam atividade do usuário
+        const eventosAtividade = [
+            'mousedown', 'mousemove', 'keypress', 
+            'scroll', 'touchstart', 'click'
+        ];
+
+        // Resetar o timer de inatividade
+        function resetarTimeout() {
+            // Limpar timers existentes
+            clearTimeout(timeoutInatividade);
+            clearTimeout(timeoutAviso);
+            clearInterval(intervalContagem);
+            
+            // Esconder modal de aviso
+            document.getElementById('timeoutModal').style.display = 'none';
+            segundosRestantes = 30;
+            
+            // Iniciar novo timer de 10 minutos
+            timeoutInatividade = setTimeout(() => {
+                mostrarAvisoTimeout();
+            }, TEMPO_INATIVIDADE);
+        }
+
+        // Mostrar aviso de timeout
+        function mostrarAvisoTimeout() {
+            const modal = document.getElementById('timeoutModal');
+            modal.style.display = 'block';
+            segundosRestantes = 30;
+            
+            // Atualizar countdown
+            atualizarContagem();
+            
+            // Iniciar contagem regressiva
+            intervalContagem = setInterval(() => {
+                segundosRestantes--;
+                atualizarContagem();
+                
+                if (segundosRestantes <= 0) {
+                    clearInterval(intervalContagem);
+                    fazerLogoutAutomatico();
+                }
+            }, 1000);
+            
+            // Timer de 30 segundos para logout automático
+            timeoutAviso = setTimeout(() => {
+                fazerLogoutAutomatico();
+            }, TEMPO_AVISO);
+        }
+
+        // Atualizar contagem regressiva visual
+        function atualizarContagem() {
+            const elemento = document.getElementById('timeoutCountdown');
+            elemento.textContent = segundosRestantes;
+            
+            // Mudar cor conforme tempo diminui
+            if (segundosRestantes <= 10) {
+                elemento.style.color = '#ff4757';
+                elemento.style.animation = 'pulse 0.5s infinite';
+            } else if (segundosRestantes <= 20) {
+                elemento.style.color = '#ffa502';
+            } else {
+                elemento.style.color = '#ffd700';
+            }
+        }
+
+        // Fazer logout automático por inatividade
+        function fazerLogoutAutomatico() {
+            console.log('🔒 Logout automático por inatividade');
+            clearInterval(intervalContagem);
+            clearTimeout(timeoutAviso);
+            document.getElementById('timeoutModal').style.display = 'none';
+            
+            // Fazer logout do Firebase
+            if (typeof firebase !== 'undefined' && firebase.auth) {
+                firebase.auth().signOut().then(() => {
+                    alert('⏰ Sessão encerrada por inatividade. Por favor, faça login novamente.');
+                    window.location.href = 'admin-login.html';
+                }).catch((error) => {
+                    console.error('Erro ao fazer logout:', error);
+                    window.location.href = 'admin-login.html';
+                });
+            } else {
+                window.location.href = 'admin-login.html';
+            }
+        }
+
+        // Inicializar sistema de timeout quando usuário fizer login
+        function iniciarMonitoramentoInatividade() {
+            console.log('🔐 Sistema de timeout de inatividade ativado (10min)');
+            
+            // Adicionar listeners de atividade
+            eventosAtividade.forEach(evento => {
+                document.addEventListener(evento, resetarTimeout, true);
+            });
+            
+            // Iniciar primeiro timer
+            resetarTimeout();
+        }
+
+        // Parar monitoramento (quando fizer logout manual)
+        function pararMonitoramentoInatividade() {
+            clearTimeout(timeoutInatividade);
+            clearTimeout(timeoutAviso);
+            clearInterval(intervalContagem);
+            
+            eventosAtividade.forEach(evento => {
+                document.removeEventListener(evento, resetarTimeout, true);
+            });
+        }
+
         // Inicializar Firebase
         const firebaseInitialized = initFirebase();
 
@@ -321,10 +571,15 @@
             if (!user) {
                 // Não está logado, redirecionar para login
                 console.log('❌ Usuário não autenticado, redirecionando para login');
+                pararMonitoramentoInatividade(); // Garantir que timers sejam limpos
                 window.location.href = 'admin-login.html';
             } else {
                 usuarioLogado = user;
                 console.log('✅ Usuário logado:', user.email);
+                
+                // Iniciar sistema de timeout de inatividade
+                iniciarMonitoramentoInatividade();
+                
                 // Carregar formulários
                 setTimeout(() => carregarFormularios(), 500);
             }
@@ -904,6 +1159,9 @@
         // Fazer logout
         async function fazerLogout() {
             if (confirm('Deseja sair da área administrativa?')) {
+                // Parar monitoramento de inatividade
+                pararMonitoramentoInatividade();
+                
                 await logoutAdmin();
                 window.location.href = 'admin-login.html';
             }
