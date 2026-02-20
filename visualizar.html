@@ -299,6 +299,20 @@
         let todosFormularios = [];
         let usuarioLogado = null;
 
+        // Função auxiliar para converter Firestore Timestamp ou ISO String para Date
+        function converterTimestamp(ts) {
+            if (!ts) return null;
+            
+            // Se é objeto Firestore Timestamp com seconds
+            if (typeof ts === 'object' && ts.seconds) {
+                return new Date(ts.seconds * 1000);
+            }
+            
+            // Se é string ISO ou número
+            const data = new Date(ts);
+            return !isNaN(data.getTime()) ? data : null;
+        }
+
         // Inicializar Firebase
         const firebaseInitialized = initFirebase();
 
@@ -399,12 +413,31 @@
                 return;
             }
 
+            // 🔍 LOG DE DIAGNÓSTICO - Verificar estrutura dos dados
+            console.log('📊 Diagnóstico de Formulários:');
+            console.log('Total de formulários:', formularios.length);
+            if (formularios.length > 0) {
+                console.log('Exemplo do primeiro formulário:', formularios[0]);
+                console.log('Campos de data disponíveis:');
+                console.log('- timestamp:', formularios[0].timestamp);
+                console.log('- createdAt:', formularios[0].createdAt);
+                if (formularios[0].timestamp) {
+                    const testeData = new Date(formularios[0].timestamp);
+                    console.log('- Conversão Date():', testeData.toString());
+                    console.log('- Data válida?', !isNaN(testeData.getTime()));
+                }
+            }
+
             // Ordenar por data mais recente
             formularios.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
             container.innerHTML = formularios.map((form, index) => {
-                const data = new Date(form.timestamp);
-                const dataFormatada = data.toLocaleString('pt-BR');
+                // Validar e formatar a data usando função auxiliar
+                let dataFormatada = 'Data não disponível';
+                const dataObj = converterTimestamp(form.timestamp) || converterTimestamp(form.createdAt);
+                if (dataObj) {
+                    dataFormatada = dataObj.toLocaleString('pt-BR');
+                }
                 
                 let badgeClass = '';
                 let tipoLabel = '';
@@ -492,7 +525,8 @@
                 
                 let matchData = true;
                 if (data) {
-                    const formData = new Date(form.timestamp).toISOString().split('T')[0];
+                    const dataObj = converterTimestamp(form.timestamp);
+                    const formData = dataObj ? dataObj.toISOString().split('T')[0] : '';
                     matchData = formData === data;
                 }
 
@@ -560,7 +594,10 @@
             if (form.cpf) html += '<div class="field"><div class="field-label">CPF</div><div class="field-value">' + form.cpf + '</div></div>';
             if (form.email) html += '<div class="field"><div class="field-label">E-mail</div><div class="field-value">' + form.email + '</div></div>';
             if (form.telefone) html += '<div class="field"><div class="field-label">Telefone/WhatsApp</div><div class="field-value">' + form.telefone + '</div></div>';
-            if (form.dataNascimento) html += '<div class="field"><div class="field-label">Data de Nascimento</div><div class="field-value">' + new Date(form.dataNascimento).toLocaleDateString('pt-BR') + (form.idade ? ' (' + form.idade + ' anos)' : '') + '</div></div>';
+            if (form.dataNascimento) {
+                const dataNasc = converterTimestamp(form.dataNascimento);
+                html += '<div class="field"><div class="field-label">Data de Nascimento</div><div class="field-value">' + (dataNasc ? dataNasc.toLocaleDateString('pt-BR') : form.dataNascimento) + (form.idade ? ' (' + form.idade + ' anos)' : '') + '</div></div>';
+            }
             html += '</div>';
 
             // Conteúdo específico por tipo de formulário
@@ -576,7 +613,10 @@
 
                 html += '<div class="section">';
                 html += '<div class="section-title">📅 Preferências de Agendamento</div>';
-                if (form.dataPreferida) html += '<div class="field"><div class="field-label">Data Preferida</div><div class="field-value">' + new Date(form.dataPreferida).toLocaleDateString('pt-BR') + '</div></div>';
+                if (form.dataPreferida) {
+                    const dataPref = converterTimestamp(form.dataPreferida);
+                    html += '<div class="field"><div class="field-label">Data Preferida</div><div class="field-value">' + (dataPref ? dataPref.toLocaleDateString('pt-BR') : form.dataPreferida) + '</div></div>';
+                }
                 if (form.horarioPreferido) html += '<div class="field"><div class="field-label">Horário Preferido</div><div class="field-value">' + form.horarioPreferido + '</div></div>';
                 if (form.tatuadorPreferido) html += '<div class="field"><div class="field-label">Tatuador Preferido</div><div class="field-value">' + form.tatuadorPreferido + '</div></div>';
                 if (form.orcamento) html += '<div class="field"><div class="field-label">Orçamento</div><div class="field-value">' + form.orcamento + '</div></div>';
@@ -622,7 +662,9 @@
                 html += '<div class="section">';
                 html += '<div class="section-title">✅ Termo de Consentimento</div>';
                 if (form.assinatura) {
-                    html += '<div class="success-box"><strong>✓ Consentimento Fornecido</strong><br>Assinado digitalmente em ' + (form.dataAssinatura ? new Date(form.dataAssinatura).toLocaleString('pt-BR') : (form.timestamp ? new Date(form.timestamp).toLocaleString('pt-BR') : 'data desconhecida')) + '</div>';
+                    const dataAssinatura = converterTimestamp(form.dataAssinatura) || converterTimestamp(form.timestamp);
+                    const dataAssinaturaFormatada = dataAssinatura ? dataAssinatura.toLocaleString('pt-BR') : 'data desconhecida';
+                    html += '<div class="success-box"><strong>✓ Consentimento Fornecido</strong><br>Assinado digitalmente em ' + dataAssinaturaFormatada + '</div>';
                 } else {
                     html += '<div class="warning-box"><strong>❌ Atenção:</strong> Consentimento NÃO assinado</div>';
                 }
@@ -665,8 +707,11 @@
             }
 
             // Rodapé com informações
+            const dataObj = converterTimestamp(form.timestamp) || converterTimestamp(form.createdAt);
+            const dataPreenchimento = dataObj ? dataObj.toLocaleString('pt-BR') : 'N/A';
+            
             html += '<div class="footer-info">';
-            html += '<strong>Data de Preenchimento:</strong> ' + (form.timestamp ? new Date(form.timestamp).toLocaleString('pt-BR') : (form.createdAt ? new Date(form.createdAt).toLocaleString('pt-BR') : 'N/A')) + '<br>';
+            html += '<strong>Data de Preenchimento:</strong> ' + dataPreenchimento + '<br>';
             html += '<strong>Status:</strong> ' + (form.status || 'novo').toUpperCase();
             html += '</div>';
 
@@ -681,6 +726,9 @@
         function imprimirFormulario(index) {
             const form = todosFormularios[index];
             const printWindow = window.open('', 'Imprimir', 'width=800,height=600');
+            
+            const dataObj = converterTimestamp(form.timestamp) || converterTimestamp(form.createdAt);
+            const dataFormatada = dataObj ? dataObj.toLocaleString('pt-BR') : 'N/A';
             
             let content = `
                 <html>
@@ -700,7 +748,7 @@
                 <body>
                     <h1>Formulário: ${form.formType.toUpperCase()}</h1>
                     <p><strong>ID:</strong> ${form.formId}</p>
-                    <p><strong>Data:</strong> ${new Date(form.timestamp).toLocaleString('pt-BR')}</p>
+                    <p><strong>Data:</strong> ${dataFormatada}</p>
                     <hr>
                     <h2>Dados do Cliente</h2>
                     <div class="field"><strong>Nome:</strong> ${form.nome || 'N/A'}</div>
@@ -787,13 +835,16 @@
 
             // Adicionar dados
             todosFormularios.forEach(form => {
+                const dataObj = converterTimestamp(form.timestamp) || converterTimestamp(form.createdAt);
+                const dataFormatada = dataObj ? dataObj.toLocaleDateString('pt-BR') : 'N/A';
+                
                 const row = [
                     form.formType || '',
                     (form.nome || '').replace(/;/g, ','),
                     form.cpf || '',
                     form.email || '',
                     form.telefone || '',
-                    new Date(form.timestamp).toLocaleDateString('pt-BR'),
+                    dataFormatada,
                     form.formId || ''
                 ];
                 csvContent += row.join(';') + '\n';

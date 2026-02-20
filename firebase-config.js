@@ -127,12 +127,26 @@ async function loadFromFirestore(filters = {}) {
 
         snapshot.forEach(doc => {
             const data = doc.data();
-            formularios.push({
+            
+            // Converter Firestore Timestamp para string ISO
+            const formData = {
                 id: doc.id,
                 formId: doc.id,
                 ...data
-            });
-            console.log(`✅ Documento carregado: ${doc.id}`, data);
+            };
+            
+            // Se timestamp é um objeto Firestore Timestamp, converte para ISO string
+            if (formData.timestamp && typeof formData.timestamp === 'object' && formData.timestamp.seconds) {
+                formData.timestamp = new Date(formData.timestamp.seconds * 1000).toISOString();
+            }
+            
+            // Mesmo para createdAt se existir
+            if (formData.createdAt && typeof formData.createdAt === 'object' && formData.createdAt.seconds) {
+                formData.createdAt = new Date(formData.createdAt.seconds * 1000).toISOString();
+            }
+            
+            formularios.push(formData);
+            console.log(`✅ Documento carregado: ${doc.id}`, formData);
         });
 
         console.log(`✅ Total: ${formularios.length} formulários carregados do Firestore`);
