@@ -1,3 +1,12 @@
+/**
+ * Opedroquetatua - Sistema de Formulários para Estúdio de Tatuagem
+ * Copyright (c) 2026 Opedroquetatua
+ * Todos os direitos reservados.
+ * 
+ * Este software e seu código-fonte são propriedade protegida.
+ * Uso não autorizado, cópia, modificação ou distribuição são estritamente proibidos.
+ */
+
 // Configuração do Firebase
 // IMPORTANTE: Substitua com suas credenciais do Firebase após criar o projeto
 
