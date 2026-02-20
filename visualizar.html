@@ -309,6 +309,10 @@
 
         // Carregar e exibir formulários
         async function carregarFormularios() {
+            console.log('🔄 Iniciando carregamento de formulários...');
+            console.log('Firebase inicializado:', firebaseInitialized);
+            console.log('localStorage conteúdo:', localStorage.getItem('studioForms'));
+            
             // Tentar carregar do Firebase primeiro
             if (firebaseInitialized && typeof loadFromFirestore === 'function') {
                 try {
@@ -318,13 +322,16 @@
                     console.warn('⚠️ Erro ao carregar do Firebase, usando localStorage:', error);
                     const savedForms = localStorage.getItem('studioForms');
                     todosFormularios = savedForms ? JSON.parse(savedForms) : [];
+                    console.log('📦 Formulários do localStorage:', todosFormularios.length);
                 }
             } else {
                 // Fallback para localStorage
                 const savedForms = localStorage.getItem('studioForms');
                 todosFormularios = savedForms ? JSON.parse(savedForms) : [];
+                console.log('📦 Formulários do localStorage (fallback):', todosFormularios.length);
             }
             
+            console.log('Total de formulários carregados:', todosFormularios.length);
             atualizarEstatisticas();
             exibirFormularios(todosFormularios);
         }
