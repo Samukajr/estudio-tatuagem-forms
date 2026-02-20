@@ -541,6 +541,9 @@
 
             printWindow.document.write(content);
             printWindow.document.close();
+        }
+
+        // Excluir formulário
         async function excluirFormulario(index) {
             if (confirm('Tem certeza que deseja excluir este formulário? Esta ação não pode ser desfeita.')) {
                 const form = todosFormularios[index];
@@ -558,11 +561,12 @@
                 todosFormularios.splice(index, 1);
                 localStorage.setItem('studioForms', JSON.stringify(todosFormularios));
                 
-            if (confirm('Tem certeza que deseja excluir este formulário? Esta ação não pode ser desfeita.')) {
-                todosFormularios.splice(index, 1);
-                localStorage.setItem('studioForms', JSON.stringify(todosFormularios));
                 carregarFormularios();
                 alert('Formulário excluído com sucesso!');
+            }
+        }
+
+        // Limpar todos os dados
         async function limparTodosDados() {
             if (confirm('ATENÇÃO: Isso irá excluir TODOS os formulários permanentemente. Deseja continuar?')) {
                 if (confirm('Tem CERTEZA ABSOLUTA? Esta ação não pode ser desfeita!')) {
@@ -594,22 +598,6 @@
 
         // Carregar ao iniciar (será chamado após autenticação)
         // A função carregarFormularios() será chamada pelo onAuthStateChanged
-        }
-
-        // Limpar todos os dados
-        function limparTodosDados() {
-            if (confirm('ATENÇÃO: Isso irá excluir TODOS os formulários permanentemente. Deseja continuar?')) {
-                if (confirm('Tem CERTEZA ABSOLUTA? Esta ação não pode ser desfeita!')) {
-                    localStorage.removeItem('studioForms');
-                    todosFormularios = [];
-                    carregarFormularios();
-                    alert('Todos os dados foram excluídos.');
-                }
-            }
-        }
-
-        // Carregar ao iniciar
-        window.addEventListener('load', carregarFormularios);
     </script>
 </body>
 </html>
