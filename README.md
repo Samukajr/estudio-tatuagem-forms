@@ -51,7 +51,7 @@ Sistema web completo e moderno de formulários digitais para estúdios de tatuag
 - ✅ Conformidade com LGPD (Lei Geral de Proteção de Dados)
 - ✅ Conformidade com normas da ANVISA
 - ✅ Validações de segurança (álcool, gravidez, menoridade)
-- ✅ Criptografia de dados sensíveis
+- ✅ Criptografia em trânsito (HTTPS)
 - ✅ Termos legais completos
 - ✅ Proteção de privacidade do cliente
 
@@ -134,7 +134,8 @@ Edite os seguintes arquivos para adicionar suas informações:
 
 ### Armazenamento
 
-Os dados são salvos localmente no navegador usando `localStorage`:
+Os dados podem ser salvos no Firebase Firestore (quando configurado) e mantidos
+como backup local no navegador usando `localStorage`:
 
 ```javascript
 localStorage.getItem('studioForms') // Recuperar todos os formulários
@@ -142,7 +143,7 @@ localStorage.getItem('studioForms') // Recuperar todos os formulários
 
 ### Visualizar Dados Salvos
 
-Abra `visualizar.html` para ver todos os formulários submetidos:
+Abra `visualizar.html` para ver todos os formulários submetidos (Firebase ou backup local):
 - Filtrar por tipo de formulário
 - Buscar por nome ou CPF
 - Exportar para PDF/impressão

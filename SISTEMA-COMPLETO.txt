@@ -133,7 +133,7 @@
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    
    ├─ README.md
-   │  └─ Documentação técnica completa (inglês)
+   │  └─ Documentação técnica completa (português)
    │
    ├─ GUIA-RAPIDO.txt
    │  └─ Instruções básicas de uso (português)

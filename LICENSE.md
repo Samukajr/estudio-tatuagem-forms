@@ -127,7 +127,7 @@ Após encerramento:
 O Licenciante garante que:
 - ✓ Tem direito de conceder esta Licença
 - ✓ Software não viola direitos de terceiros
-- ✓ Software operará conforme descrito (99% uptime)
+- ✓ Software operará conforme descrito, sujeito à disponibilidade da infraestrutura
 
 ### 6.2 Isenção de Garantias
 **O SOFTWARE É FORNECIDO "COMO ESTÁ"** sem garantias adicionais:
@@ -157,14 +157,14 @@ EM NENHUMA CIRCUNSTÂNCIA O LICENCIANTE SERÁ RESPONSÁVEL POR:
 ## 8. PRIVACIDADE E SEGURANÇA
 
 ### 8.1 Armazenamento de Dados
-- Dados armazenados em Firebase (servidores Google)
-- Criptografia end-to-end em trânsito
-- Backup automático diário
-- Retenção: Enquanto licença ativa + 30 dias após cancelamento
+- Dados armazenados em Firebase (servidores Google), quando configurado
+- Criptografia em trânsito (HTTPS)
+- Backups e retenção conforme configurações do Licenciado e do Firebase
+- Retenção: conforme política definida pelo Licenciado
 
 ### 8.2 Acesso do Licenciante
 - Licenciante pode acessar dados para suporte/manutenção
-- Acessos são registrados em auditoria
+- Acessos podem ser registrados
 - Dados NUNCA serão vendidos ou compartilhados
 - Exclusivamente para fins de suporte
 

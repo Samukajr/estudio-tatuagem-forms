@@ -41,9 +41,10 @@ canais oficiais de Opedroquetatua.
 REGISTRO E PROTEÇÃO LEGAL
 ═══════════════════════════════════════════════════════════════════════════════
 
-Este software está em processo de registro no INPI (Instituto Nacional da
+Este software pode ser registrado no INPI (Instituto Nacional da
 Propriedade Industrial) sob o regime de Registro de Programa de Computador (RPC),
-conforme Lei nº 9.609/98 (Lei do Software).
+conforme Lei nº 9.609/98 (Lei do Software). O registro é recomendado para
+reforçar a proteção jurídica.
 
 ═══════════════════════════════════════════════════════════════════════════════
 PENALIDADES

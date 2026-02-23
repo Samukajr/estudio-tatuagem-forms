@@ -59,7 +59,7 @@ Sistema web completo para gerenciar formulários digitais de clientes em estúdi
 - **JavaScript (ES6+)** - Lógica de funcionamento
 
 ### Tecnologias e Frameworks
-- **Firebase Realtime Database** - Armazenamento de dados
+- **Firebase Firestore** - Armazenamento de dados
 - **Firebase Authentication** - Autenticação de usuários
 - **SignaturePad.js** - Captura de assinaturas digitais
 - **Font Awesome 6.4.0** - Ícones e elementos visuais
@@ -128,7 +128,7 @@ estudio-tatuagem-forms/
 
 4. **Gerenciamento de Dados Avançado**
    - Filtros multi-campo
-   - Busca fuzzy por nome/CPF
+   - Busca por nome/CPF
    - Estatísticas em tempo real
    - Exportação em múltiplos formatos
 
@@ -175,7 +175,6 @@ estudio-tatuagem-forms/
 1. **Sistema Integrado Firebase + localStorage**
    - Sincronização automática de dados
    - Funciona offline com backup local
-   - Único no mercado brasileiro
 
 2. **Exportação Dinâmica Excel/JSON**
    - Geração automática de planilhas
