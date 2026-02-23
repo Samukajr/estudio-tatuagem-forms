@@ -299,3 +299,93 @@ function calculateAge(birthDate) {
 function isAdult(birthDate) {
     return calculateAge(birthDate) >= 18;
 }
+
+const PROFILE_STORAGE_KEY = 'studioProfile';
+const COMMON_PROFILE_FIELDS = [
+    'nome',
+    'cpf',
+    'rg',
+    'email',
+    'telefone',
+    'dataNascimento',
+    'endereco'
+];
+
+function loadProfile() {
+    try {
+        return JSON.parse(localStorage.getItem(PROFILE_STORAGE_KEY) || '{}');
+    } catch (error) {
+        return {};
+    }
+}
+
+function saveProfile(profile) {
+    localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profile));
+}
+
+function updateProfileFromField(fieldId) {
+    const field = document.getElementById(fieldId);
+    if (!field) {
+        return;
+    }
+
+    const profile = loadProfile();
+    profile[fieldId] = field.value.trim();
+
+    if (fieldId === 'dataNascimento') {
+        const ageField = document.getElementById('idade');
+        if (ageField && field.value) {
+            const age = calculateAge(field.value);
+            ageField.value = age;
+            profile.idade = age;
+        }
+    }
+
+    saveProfile(profile);
+}
+
+function applyProfileToField(fieldId, profile) {
+    const field = document.getElementById(fieldId);
+    if (!field || !profile[fieldId] || field.value.trim()) {
+        return;
+    }
+
+    field.value = profile[fieldId];
+
+    if (fieldId === 'cpf') {
+        formatCPF(field);
+    }
+
+    if (fieldId === 'telefone') {
+        formatPhone(field);
+    }
+
+    if (fieldId === 'dataNascimento') {
+        const ageField = document.getElementById('idade');
+        if (ageField && field.value) {
+            ageField.value = calculateAge(field.value);
+        }
+    }
+}
+
+function syncProfileToForm() {
+    const profile = loadProfile();
+    COMMON_PROFILE_FIELDS.forEach((fieldId) => applyProfileToField(fieldId, profile));
+}
+
+function bindProfileSync() {
+    COMMON_PROFILE_FIELDS.forEach((fieldId) => {
+        const field = document.getElementById(fieldId);
+        if (!field) {
+            return;
+        }
+
+        const eventName = fieldId === 'dataNascimento' ? 'change' : 'input';
+        field.addEventListener(eventName, () => updateProfileFromField(fieldId));
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    syncProfileToForm();
+    bindProfileSync();
+});
