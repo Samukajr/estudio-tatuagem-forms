@@ -380,6 +380,32 @@
         document.getElementById('anamneseForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
+            if (!validateForm('anamneseForm')) {
+                showErrorMessage('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+
+            const requiredRadios = [
+                { name: 'usaMedicamento', message: 'Informe se faz uso de medicamentos.' },
+                { name: 'gravida', message: 'Informe se está grávida ou amamentando.' },
+                { name: 'alcool', message: 'Informe se consumiu álcool nas últimas 24 horas.' },
+                { name: 'doacao', message: 'Informe se doou sangue recentemente.' },
+                { name: 'cirurgia', message: 'Informe se realizou cirurgia recentemente.' },
+                { name: 'implantes', message: 'Informe se possui marca-passo, implantes ou próteses.' }
+            ];
+
+            for (const radio of requiredRadios) {
+                if (!document.querySelector(`input[name="${radio.name}"]:checked`)) {
+                    showErrorMessage(radio.message);
+                    return;
+                }
+            }
+
+            if (!document.getElementById('declaracao').checked) {
+                showErrorMessage('Confirme a declaração de veracidade das informações.');
+                return;
+            }
+
             const formData = {
                 nome: document.getElementById('nome').value,
                 dataNascimento: document.getElementById('dataNascimento').value,
@@ -398,7 +424,7 @@
                 autoimune: document.getElementById('autoimune').checked,
                 nenhumaCondicao: document.getElementById('nenhuma').checked,
                 outrasCondicoes: document.getElementById('outrasCondicoes').value,
-                usaMedicamento: document.querySelector('input[name="usaMedicamento"]:checked').value,
+                usaMedicamento: document.querySelector('input[name="usaMedicamento"]:checked')?.value,
                 medicamentos: document.getElementById('medicamentos').value,
                 alergiaLatex: document.getElementById('alergiaLatex').checked,
                 alergiaAnestesico: document.getElementById('alergiaAnestesico').checked,
@@ -407,12 +433,12 @@
                 alergiaTinta: document.getElementById('alergiaTinta').checked,
                 semAlergia: document.getElementById('semAlergia').checked,
                 outrasAlergias: document.getElementById('outrasAlergias').value,
-                gravida: document.querySelector('input[name="gravida"]:checked').value,
-                alcool: document.querySelector('input[name="alcool"]:checked').value,
-                doacao: document.querySelector('input[name="doacao"]:checked').value,
-                cirurgia: document.querySelector('input[name="cirurgia"]:checked').value,
+                gravida: document.querySelector('input[name="gravida"]:checked')?.value,
+                alcool: document.querySelector('input[name="alcool"]:checked')?.value,
+                doacao: document.querySelector('input[name="doacao"]:checked')?.value,
+                cirurgia: document.querySelector('input[name="cirurgia"]:checked')?.value,
                 qualCirurgia: document.getElementById('qualCirurgia').value,
-                implantes: document.querySelector('input[name="implantes"]:checked').value,
+                implantes: document.querySelector('input[name="implantes"]:checked')?.value,
                 informacoesAdicionais: document.getElementById('informacoesAdicionais').value,
                 formId: generateFormId()
             };
