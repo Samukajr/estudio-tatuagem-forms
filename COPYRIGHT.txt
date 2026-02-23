@@ -1,9 +1,11 @@
 ═══════════════════════════════════════════════════════════════════════════════
-    OPEDROQUETATUA - SISTEMA DE FORMULÁRIOS PARA ESTÚDIO DE TATUAGEM
+    SISTEMA DE FORMULÁRIOS PARA ESTÚDIO DE TATUAGEM
     AVISO DE DIREITOS AUTORAIS E PROPRIEDADE INTELECTUAL
 ═══════════════════════════════════════════════════════════════════════════════
 
-Copyright (c) 2026 Opedroquetatua
+Copyright (c) 2026 Samtech Informática
+CNPJ: 55.004.442/0001-06
+Desenvolvedor: Samuel Lacerda
 Todos os direitos reservados.
 
 ═══════════════════════════════════════════════════════════════════════════════
@@ -12,7 +14,7 @@ PROTEÇÃO DE PROPRIEDADE INTELECTUAL
 
 Este software, incluindo mas não limitado ao código-fonte, documentação,
 interface visual, design, arquitetura, algoritmos e conceitos nele contidos,
-é propriedade exclusiva e protegida de Opedroquetatua.
+é propriedade exclusiva e protegida de Samtech Informática.
 
 ═══════════════════════════════════════════════════════════════════════════════
 RESTRIÇÕES DE USO
@@ -35,7 +37,7 @@ O uso deste software requer licenciamento formal e autorização expressa
 e por escrito do detentor dos direitos autorais.
 
 Para informações sobre licenciamento comercial, entre em contato através dos
-canais oficiais de Opedroquetatua.
+canais oficiais de Samtech Informática.
 
 ═══════════════════════════════════════════════════════════════════════════════
 REGISTRO E PROTEÇÃO LEGAL
@@ -97,6 +99,6 @@ Versão: 1.0
 ═══════════════════════════════════════════════════════════════════════════════
 
 Para consultas sobre licenciamento, parcerias ou uso comercial,
-entre em contato através dos canais oficiais de Opedroquetatua.
+entre em contato através dos canais oficiais de Samtech Informática.
 
 ═══════════════════════════════════════════════════════════════════════════════

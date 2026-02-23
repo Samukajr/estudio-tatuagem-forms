@@ -1,6 +1,6 @@
 # LICENÇA DE USO - SISTEMA DE FORMULÁRIOS DIGITAL
 
-## © 2026 OPEDROQUETATUA - TODOS OS DIREITOS RESERVADOS
+## © 2026 SAMTECH INFORMÁTICA - TODOS OS DIREITOS RESERVADOS
 
 ---
 
@@ -8,7 +8,7 @@
 
 **Software:** Sistema de Formulários Digital para Estúdios de Tatuagem e Piercing, versão 1.0.0
 
-**Licenciante:** Opedroquetatua
+**Licenciante:** Samtech Informática
 
 **Licenciado:** Cliente/Estúdio que adquire o direito de uso
 
@@ -255,4 +255,4 @@ Ao fazer login da primeira vez no Sistema, você confirma ter lido, compreendido
 
 **Status:** Licença Ativa
 
-*Esta licença é propriedade intelectual de Opedroquetatua e está protegida pelas leis brasileiras de direitos autorais.*
+*Esta licença é propriedade intelectual de Samtech Informática (CNPJ 55.004.442/0001-06) e está protegida pelas leis brasileiras de direitos autorais.*

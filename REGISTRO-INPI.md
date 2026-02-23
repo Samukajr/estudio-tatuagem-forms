@@ -8,9 +8,13 @@
 
 **Data de Criação:** 20 de fevereiro de 2026
 
-**Proprietário/Titular:** Opedroquetatua
+**Proprietário/Titular:** Opedroquetatua (Cliente)
 
-**Desenvolvedor:** Samuel Lacerda (Opedroquetatua)
+**Desenvolvedor:** Samtech Informática
+
+**CNPJ:** 55.004.442/0001-06
+
+**Responsável Técnico:** Samuel Lacerda
 
 ---
 
@@ -196,7 +200,11 @@ estudio-tatuagem-forms/
 ## 📝 TERMOS DE PROPRIEDADE INTELECTUAL
 
 ### Direitos Autorais
-© 2026 Opedroquetatua. Todos os direitos reservados.
+© 2026 Samtech Informática. Todos os direitos reservados.
+
+**CNPJ:** 55.004.442/0001-06
+
+**Desenvolvedor:** Samuel Lacerda
 
 ### Restrições de Uso
 - Uso exclusivamente para o cliente licenciado
@@ -227,7 +235,11 @@ Licença proprietária restritiva. Veja LICENSE.md para detalhes completos.
 
 ## 📞 INFORMAÇÕES DE CONTATO
 
-**Proprietário:** Opedroquetatua
+**Cliente/Titular do Sistema:** Opedroquetatua
+
+**Proprietário dos Direitos Autorais:** Samtech Informática
+
+**CNPJ:** 55.004.442/0001-06
 
 **Desenvolvedor:** Samuel Lacerda
 

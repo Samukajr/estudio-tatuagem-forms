@@ -277,11 +277,16 @@ function saveFormData(formName, data) {
 
 ## 📄 Licença
 
-Livre para uso comercial em estúdios de tatuagem e body piercing.
+**Desenvolvido por:** Samtech Informática  
+**CNPJ:** 55.004.442/0001-06  
+**Responsável Técnico:** Samuel Lacerda
+
+Todos os direitos autorais reservados à Samtech Informática.
 
 ## 👨‍💻 Créditos
 
-Desenvolvido com ❤️ para a comunidade de tatuadores e body piercers.
+Desenvolvido por Samuel Lacerda - Samtech Informática  
+Com ❤️ para a comunidade de tatuadores e body piercers.
 
 ---
 
