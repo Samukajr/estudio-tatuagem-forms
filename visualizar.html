@@ -862,10 +862,13 @@
                 html += '<div class="section">';
                 html += '<div class="section-title">🎨 Informações do Projeto</div>';
                 if (form.tipoServico) html += '<div class="field"><div class="field-label">Tipo de Serviço</div><div class="field-value">' + form.tipoServico + '</div></div>';
-                if (form.localTatuagem) html += '<div class="field"><div class="field-label">Local do Corpo</div><div class="field-value">' + form.localTatuagem + '</div></div>';
-                if (form.tamanho) html += '<div class="field"><div class="field-label">Tamanho Estimado</div><div class="field-value">' + form.tamanho + '</div></div>';
+                if (form.localCorpo) html += '<div class="field"><div class="field-label">Local do Corpo</div><div class="field-value">' + form.localCorpo + '</div></div>';
+                if (form.tamanhoEstimado) html += '<div class="field"><div class="field-label">Tamanho Estimado</div><div class="field-value">' + form.tamanhoEstimado + '</div></div>';
                 if (form.estilo) html += '<div class="field"><div class="field-label">Estilo</div><div class="field-value">' + form.estilo + '</div></div>';
                 if (form.descricao) html += '<div class="field"><div class="field-label">Descrição do Projeto</div><div class="field-value" style="white-space: pre-wrap;">' + form.descricao + '</div></div>';
+                if (form.temReferencias) html += '<div class="field"><div class="field-label">Referências/Imagens</div><div class="field-value">' + form.temReferencias + '</div></div>';
+                if (form.cores) html += '<div class="field"><div class="field-label">Cores</div><div class="field-value">' + form.cores + '</div></div>';
+                if (form.primeira) html += '<div class="field"><div class="field-label">Primeira tatuagem/piercing</div><div class="field-value">' + form.primeira + '</div></div>';
                 html += '</div>';
 
                 html += '<div class="section">';
@@ -875,47 +878,87 @@
                     html += '<div class="field"><div class="field-label">Data Preferida</div><div class="field-value">' + (dataPref ? dataPref.toLocaleDateString('pt-BR') : form.dataPreferida) + '</div></div>';
                 }
                 if (form.horarioPreferido) html += '<div class="field"><div class="field-label">Horário Preferido</div><div class="field-value">' + form.horarioPreferido + '</div></div>';
-                if (form.tatuadorPreferido) html += '<div class="field"><div class="field-label">Tatuador Preferido</div><div class="field-value">' + form.tatuadorPreferido + '</div></div>';
+                if (form.artista) html += '<div class="field"><div class="field-label">Preferência de Artista</div><div class="field-value">' + form.artista + '</div></div>';
                 if (form.orcamento) html += '<div class="field"><div class="field-label">Orçamento</div><div class="field-value">' + form.orcamento + '</div></div>';
+                if (form.comoConheceu) html += '<div class="field"><div class="field-label">Como nos conheceu</div><div class="field-value">' + form.comoConheceu + '</div></div>';
+                if (form.observacoes) html += '<div class="field"><div class="field-label">Observações</div><div class="field-value" style="white-space: pre-wrap;">' + form.observacoes + '</div></div>';
                 html += '</div>';
             }
 
             else if (form.formType === 'anamnese') {
+                const condicoes = [];
+                if (form.diabetes) condicoes.push('Diabetes');
+                if (form.hipertensao) condicoes.push('Hipertensão');
+                if (form.cardiopatia) condicoes.push('Problemas cardíacos');
+                if (form.hemofilia) condicoes.push('Hemofilia');
+                if (form.epilepsia) condicoes.push('Epilepsia');
+                if (form.hepatite) condicoes.push('Hepatite');
+                if (form.hiv) condicoes.push('HIV/AIDS');
+                if (form.anemia) condicoes.push('Anemia');
+                if (form.queloides) condicoes.push('Queloides');
+                if (form['psoríase']) condicoes.push('Psoríase/Eczema');
+                if (form.vitiligo) condicoes.push('Vitiligo');
+                if (form.cancer) condicoes.push('Câncer');
+                if (form.autoimune) condicoes.push('Doenças autoimunes');
+                if (form.nenhumaCondicao) condicoes.push('Nenhuma das anteriores');
+
+                const alergias = [];
+                if (form.alergiaLatex) alergias.push('Látex');
+                if (form.alergiaAnestesico) alergias.push('Anestésicos');
+                if (form.alergiaMetais) alergias.push('Metais');
+                if (form.alergiaIodo) alergias.push('Iodo');
+                if (form.alergiaTinta) alergias.push('Tintas/Pigmentos');
+                if (form.semAlergia) alergias.push('Sem alergias conhecidas');
+
                 html += '<div class="section">';
                 html += '<div class="section-title">🏥 Condições de Saúde</div>';
-                if (form.condicoes && form.condicoes.length > 0) {
+                if (condicoes.length > 0) {
                     html += '<div class="field"><div class="field-label">Condições Reportadas</div><div class="array-items">';
-                    form.condicoes.forEach(c => html += '<span class="array-item">' + c + '</span>');
+                    condicoes.forEach(c => html += '<span class="array-item">' + c + '</span>');
                     html += '</div></div>';
                 } else {
                     html += '<div class="field"><div class="field-value empty">Nenhuma condição de saúde reportada</div></div>';
                 }
-                if (form.medicacoes) html += '<div class="field"><div class="field-label">Medicações Contínuas</div><div class="field-value" style="white-space: pre-wrap;">' + form.medicacoes + '</div></div>';
+                if (form.outrasCondicoes) html += '<div class="field"><div class="field-label">Outras Condições</div><div class="field-value" style="white-space: pre-wrap;">' + form.outrasCondicoes + '</div></div>';
+                if (form.usaMedicamento) {
+                    html += '<div class="field"><div class="field-label">Uso de Medicamentos</div><div class="field-value">' + form.usaMedicamento + '</div></div>';
+                }
+                if (form.medicamentos) html += '<div class="field"><div class="field-label">Quais Medicamentos</div><div class="field-value" style="white-space: pre-wrap;">' + form.medicamentos + '</div></div>';
                 html += '</div>';
 
                 html += '<div class="section">';
                 html += '<div class="section-title">💊 Alergias</div>';
-                if (form.alergias && form.alergias.length > 0) {
+                if (alergias.length > 0) {
                     html += '<div class="field"><div class="field-label">Alergias Reportadas</div><div class="array-items">';
-                    form.alergias.forEach(a => html += '<span class="array-item">' + a + '</span>');
+                    alergias.forEach(a => html += '<span class="array-item">' + a + '</span>');
                     html += '</div></div>';
                 } else {
                     html += '<div class="field"><div class="field-value empty">Nenhuma alergia reportada</div></div>';
                 }
-                if (form.reacoesAlergicas) html += '<div class="field"><div class="field-label">Reações Alérgicas Anteriores</div><div class="field-value" style="white-space: pre-wrap;">' + form.reacoesAlergicas + '</div></div>';
+                if (form.outrasAlergias) html += '<div class="field"><div class="field-label">Outras Alergias</div><div class="field-value" style="white-space: pre-wrap;">' + form.outrasAlergias + '</div></div>';
                 html += '</div>';
 
                 html += '<div class="section">';
                 html += '<div class="section-title">❓ Questões Médicas</div>';
-                if (form.gravidez === 'sim') html += '<div class="warning-box"><strong>⚠️ Atenção:</strong> Cliente está grávida</div>';
+                if (form.gravida === 'sim') html += '<div class="warning-box"><strong>⚠️ Atenção:</strong> Cliente está grávida/amamentando</div>';
                 if (form.alcool === 'sim') html += '<div class="warning-box"><strong>⚠️ Atenção:</strong> Consumiu álcool nas últimas 24h</div>';
                 if (form.doacao === 'sim') html += '<div class="info-box"><strong>ℹ️ Info:</strong> Doou sangue nos últimos 12 meses</div>';
-                if (form.cicatrizacao) html += '<div class="field"><div class="field-label">Problemas de Cicatrização</div><div class="field-value">' + form.cicatrizacao + '</div></div>';
-                if (form.coagulacao) html += '<div class="field"><div class="field-label">Problemas de Coagulação</div><div class="field-value">' + form.coagulacao + '</div></div>';
+                if (form.cirurgia) html += '<div class="field"><div class="field-label">Cirurgia recente</div><div class="field-value">' + form.cirurgia + '</div></div>';
+                if (form.qualCirurgia) html += '<div class="field"><div class="field-label">Qual cirurgia</div><div class="field-value" style="white-space: pre-wrap;">' + form.qualCirurgia + '</div></div>';
+                if (form.implantes) html += '<div class="field"><div class="field-label">Implantes/Próteses</div><div class="field-value">' + form.implantes + '</div></div>';
+                if (form.informacoesAdicionais) html += '<div class="field"><div class="field-label">Informações Adicionais</div><div class="field-value" style="white-space: pre-wrap;">' + form.informacoesAdicionais + '</div></div>';
                 html += '</div>';
             }
 
             else if (form.formType === 'consentimento') {
+                html += '<div class="section">';
+                html += '<div class="section-title">📋 Identificação</div>';
+                if (form.rg) html += '<div class="field"><div class="field-label">RG</div><div class="field-value">' + form.rg + '</div></div>';
+                if (form.endereco) html += '<div class="field"><div class="field-label">Endereço</div><div class="field-value">' + form.endereco + '</div></div>';
+                if (form.telefone) html += '<div class="field"><div class="field-label">Telefone</div><div class="field-value">' + form.telefone + '</div></div>';
+                if (form.email) html += '<div class="field"><div class="field-label">E-mail</div><div class="field-value">' + form.email + '</div></div>';
+                html += '</div>';
+
                 html += '<div class="section">';
                 html += '<div class="section-title">✅ Termo de Consentimento</div>';
                 if (form.assinatura) {
@@ -928,17 +971,26 @@
                 if (form.assinatura) {
                     html += '<div class="field"><div class="field-label">Assinatura Digital</div><div class="field-value"><img src="' + form.assinatura + '" style="max-width: 100%; border: 1px solid #ddd; padding: 10px; background: white;" alt="Assinatura"></div></div>';
                 }
+                if (form.menorIdade && form.responsavel) {
+                    html += '<div class="field"><div class="field-label">Responsável Legal</div><div class="field-value">' + form.responsavel.nome + '</div></div>';
+                    html += '<div class="field"><div class="field-label">CPF do Responsável</div><div class="field-value">' + form.responsavel.cpf + '</div></div>';
+                    html += '<div class="field"><div class="field-label">RG do Responsável</div><div class="field-value">' + form.responsavel.rg + '</div></div>';
+                    html += '<div class="field"><div class="field-label">Parentesco</div><div class="field-value">' + form.responsavel.parentesco + '</div></div>';
+                    if (form.responsavel.assinatura) {
+                        html += '<div class="field"><div class="field-label">Assinatura do Responsável</div><div class="field-value"><img src="' + form.responsavel.assinatura + '" style="max-width: 100%; border: 1px solid #ddd; padding: 10px; background: white;" alt="Assinatura responsável"></div></div>';
+                    }
+                }
                 html += '</div>';
             }
 
             else if (form.formType === 'uso-imagem') {
                 html += '<div class="section">';
                 html += '<div class="section-title">📸 Autorização de Uso de Imagem</div>';
-                
-                if (form.preferencias && form.preferencias.redes) {
+
+                if (form.autorizacoes) {
                     html += '<div class="field"><div class="field-label">Redes Sociais Autorizadas</div><div class="array-items">';
                     let temAutorizacao = false;
-                    Object.entries(form.preferencias.redes).forEach(([rede, autorizado]) => {
+                    Object.entries(form.autorizacoes).forEach(([rede, autorizado]) => {
                         if (autorizado) {
                             html += '<span class="array-item">' + rede.toUpperCase() + '</span>';
                             temAutorizacao = true;
@@ -951,14 +1003,29 @@
                     }
                     html += '</div>';
                 }
-                
+
                 if (form.preferencias) {
-                    if (form.preferencias.visibilidade) {
-                        html += '<div class="field"><div class="field-label">Visibilidade do Rosto</div><div class="field-value">' + form.preferencias.visibilidade + '</div></div>';
+                    if (form.preferencias.rosto) {
+                        html += '<div class="field"><div class="field-label">Visibilidade do Rosto</div><div class="field-value">' + form.preferencias.rosto + '</div></div>';
                     }
                     if (form.preferencias.identificacao) {
                         html += '<div class="field"><div class="field-label">Autorização de Identificação</div><div class="field-value">' + form.preferencias.identificacao + '</div></div>';
                     }
+                    if (form.preferencias.tag) {
+                        html += '<div class="field"><div class="field-label">Marcação em Redes</div><div class="field-value">' + form.preferencias.tag + '</div></div>';
+                    }
+                    if (form.preferencias.redesSociais) {
+                        html += '<div class="field"><div class="field-label">Redes para Marcação</div><div class="field-value">' + form.preferencias.redesSociais + '</div></div>';
+                    }
+                }
+                if (form.assinatura) {
+                    const dataAssinatura = converterTimestamp(form.dataAssinatura) || converterTimestamp(form.timestamp);
+                    const dataAssinaturaFormatada = dataAssinatura ? dataAssinatura.toLocaleString('pt-BR') : 'data desconhecida';
+                    html += '<div class="success-box"><strong>✓ Autorização Assinada</strong><br>Assinado digitalmente em ' + dataAssinaturaFormatada + '</div>';
+                    html += '<div class="field"><div class="field-label">Assinatura Digital</div><div class="field-value"><img src="' + form.assinatura + '" style="max-width: 100%; border: 1px solid #ddd; padding: 10px; background: white;" alt="Assinatura"></div></div>';
+                }
+                if (form.observacoes) {
+                    html += '<div class="field"><div class="field-label">Observações</div><div class="field-value" style="white-space: pre-wrap;">' + form.observacoes + '</div></div>';
                 }
                 html += '</div>';
             }
